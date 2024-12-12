@@ -1,0 +1,15 @@
+{:deps {scicloj/tablecloth {:mvn/version "7.029.2"}
+        generateme/fastmath {:mvn/version "3.0.0-alpha3"}
+        org.scicloj/kindly {:mvn/version "4-beta14"}}
+ :aliases
+ {:build {:deps {io.github.clojure/tools.build {:mvn/version "0.9.6"}
+                 slipset/deps-deploy {:mvn/version "0.2.1"}}
+          :ns-default build}
+  :test {:extra-paths ["test"]
+         :extra-deps {org.clojure/test.check {:mvn/version "1.1.1"}
+                      io.github.cognitect-labs/test-runner
+                      {:git/tag "v0.5.1" :git/sha "dfb30dd"}
+                      org.scicloj/clay {:mvn/version "2-beta25"}}}
+  :dev {:extra-paths ["notebooks"]
+        :extra-deps {org.scicloj/clay {:mvn/version "2-beta25"}}}}}
+

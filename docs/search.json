@@ -1,0 +1,22 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Tablemath",
+    "section": "",
+    "text": "1 Preface\n\nsource: notebooks/index.clj",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Preface</span>"
+    ]
+  },
+  {
+    "objectID": "tablemath_book.regression.html",
+    "href": "tablemath_book.regression.html",
+    "title": "2  Regression",
+    "section": "",
+    "text": "(ns tablemath-book.regression\n  (:require [tablecloth.api :as tc]\n            [scicloj.tablemath.v1.api :as tm]))\n\n\n(-&gt; {:x (range 9)}\n    tc/dataset\n    (tc/map-columns :y [:x] (fn [x]\n                              (+ -9\n                                 (* 4 x)\n                                 (- 2 (* x x))\n                                 (+ (* x x))\n                                 (rand))))\n    (tm/create-design-matrix [:y]\n                             [[:x '(identity x)]\n                              [:x2 '(* x x)]\n                              [:x3 '(* x x x)]])\n    (tm/lm {})\n    tm/summary)\n\n\nResiduals:\n\n|      :min |       :q1 |   :median |      :q3 |    :max |\n|-----------+-----------+-----------+----------+---------|\n| -0.324626 | -0.184119 | -0.079698 | 0.210974 | 0.51492 |\n\nCoefficients:\n\n|     :name | :estimate |  :stderr |   :t-value | :p-value |  :confidence-interval |\n|-----------+-----------+----------+------------+----------+-----------------------|\n| Intercept | -6.159093 |   0.3334 | -18.473584 |   9.0E-6 | [-7.016125 -5.302061] |\n|        :x |  3.683781 | 0.384792 |   9.573439 |  2.11E-4 |    [2.694642 4.67292] |\n|       :x2 |   0.05938 | 0.116179 |   0.511108 | 0.631037 |  [-0.239267 0.358026] |\n|       :x3 | -0.003049 |  0.00953 |  -0.319964 | 0.761933 |  [-0.027546 0.021447] |\n\nF-statistic: 2443.203231366597 on degrees of freedom: {:residual 5, :model 3, :intercept 1}\np-value: 2.4711939383692538E-8\n\nR2: 0.999318300467437\nAdjusted R2: 0.9989092807478992\nResidual standard error: 0.3598104470688955 on 5 degrees of freedom\nAIC: 11.851611015397268\n\n\n\nsource: notebooks/tablemath_book/regression.clj",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Regression</span>"
+    ]
+  }
+]

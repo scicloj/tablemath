@@ -6,6 +6,10 @@
             [scicloj.kindly.v4.kind :as kind]
             [scicloj.tablemath.v1.design-matrix :as dm]))
 
+(defprotocol Summarizable
+  :extend-via-metadata true
+  (summary [this]))
+
 (defn lm
   "Linear model"
   ([dataset]
@@ -16,22 +20,20 @@
                                    first)
          ds-without-target (-> dataset
                                (tc/drop-columns [inference-column-name]))]
-     (reg/lm
-      ;; ys
-      (get dataset inference-column-name)
-      ;; xss
-      (tc/rows ds-without-target)
-      ;; options
-      (merge {:names (-> ds-without-target
-                         tc/column-names
-                         vec)}
-             options)))))
+     (-> (reg/lm
+          ;; ys
+          (get dataset inference-column-name)
+          ;; xss
+          (tc/rows ds-without-target)
+          ;; options
+          (merge {:names (-> ds-without-target
+                             tc/column-names
+                             vec)}
+                 options))
+         (vary-meta assoc `summary #(kind/code
+                                     (with-out-str
+                                       (println %))) )))))
 
-
-(defn summary [model]
-  (kind/code
-   (with-out-str
-     (println model))))
 
 (defn create-design-matrix [ds targets-specs feature-specs]
   (dm/create-design-matrix ds targets-specs feature-specs))

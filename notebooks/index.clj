@@ -16,5 +16,6 @@
                              [[:x '(identity x)]
                               [:x2 '(* x x)]
                               [:x3 '(* x x x)]])
-    (tm/lm {}))
+    (tm/lm {})
+    tm/summary)
 

@@ -2,7 +2,8 @@
   (:require [tablecloth.api :as tc]
             [fastmath.vector :as vec]
             [fastmath.ml.regression :as reg]
-            [tech.v3.dataset.modelling :as ds-mod]))
+            [tech.v3.dataset.modelling :as ds-mod]
+            [scicloj.kindly.v4.kind :as kind]))
 
 (defn lm
   "Linear model"
@@ -24,3 +25,9 @@
                          tc/column-names
                          vec)}
              options)))))
+
+
+(defn summary [model]
+  (kind/code
+   (with-out-str
+     (println model))))

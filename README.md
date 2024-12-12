@@ -9,3 +9,7 @@ This project is an initial attempt to create a Clojure library for math and stat
 In a way, it is intended to be a user-friendly compatiblity layer across this libraries.
 
 Possibly, after the details clarify, it will be merged into one of the other Scicloj libraries.
+
+## Documentation
+
+[Draft](https://scicloj.github.io/tablemath/)

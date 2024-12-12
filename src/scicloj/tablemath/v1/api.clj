@@ -3,7 +3,8 @@
             [fastmath.vector :as vec]
             [fastmath.ml.regression :as reg]
             [tech.v3.dataset.modelling :as ds-mod]
-            [scicloj.kindly.v4.kind :as kind]))
+            [scicloj.kindly.v4.kind :as kind]
+            [scicloj.tablemath.v1.design-matrix :as dm]))
 
 (defn lm
   "Linear model"
@@ -31,3 +32,6 @@
   (kind/code
    (with-out-str
      (println model))))
+
+(defn create-design-matrix [ds targets-specs feature-specs]
+  (dm/create-design-matrix ds targets-specs feature-specs))

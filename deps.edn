@@ -11,5 +11,6 @@
                       {:git/tag "v0.5.1" :git/sha "dfb30dd"}
                       org.scicloj/clay {:mvn/version "2-beta25"}}}
   :dev {:extra-paths ["notebooks"]
-        :extra-deps {org.scicloj/clay {:mvn/version "2-beta25"}}}}}
+        :extra-deps {org.scicloj/clay {:mvn/version "2-beta25"}
+                     org.scicloj/noj {:mvn/version "2-beta2"}}}}}
 

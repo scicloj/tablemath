@@ -92,47 +92,54 @@
   (or (keyword? v)
       (string? v)))
 
+(defn- should-one-hot-encode? [column]
+  (and (every? keyword-or-string? column)
+       (-> column distinct count (<= 20))))
+
 (defn- columns-with-spec
   [dataset spec]
-  (if (or (keyword? spec)
-          (string? spec))
-    [(dataset spec)]
-    ;; else
-    (let [[nam
-           column-or-columns] (if (and (vector? spec)
-                                       (-> spec count (= 2))
-                                       (-> spec first keyword-or-string?))
-                                [(first spec)
-                                 (with dataset (second spec))]
-                                ;; else
-                                [nil
-                                 (with dataset spec)])
-          columns (cond
-                    ;; a map from column names to columns or their data
-                    (map? column-or-columns)
-                    (->> column-or-columns
-                         (map (fn [[k col]]
-                                (tcc/column col {:name k}))))
-                    ;; a sequential of columns or thir data
-                    (-> column-or-columns first sequential?)
-                    column-or-columns
-                    ;; else, a single column or its data - wrap it
-                    :else
-                    [column-or-columns])
-          more-than-one (-> columns
-                            count
-                            (> 1))]
-      (->> columns
-           (map-indexed (fn [i col]
-                          (let [suffix (when more-than-one
-                                         (str "_" i))]
-                            (update-colname
-                             col
-                             (if nam
-                               #(concat-names nam (or % suffix))
-                               #(or % (str spec suffix)))))))
-           doall))))
-
+  (->> (if (or (keyword? spec)
+               (string? spec))
+         [(dataset spec)]
+         ;; else
+         (let [[nam
+                column-or-columns] (if (and (vector? spec)
+                                            (-> spec count (= 2))
+                                            (-> spec first keyword-or-string?))
+                                     [(first spec)
+                                      (with dataset (second spec))]
+                                     ;; else
+                                     [nil
+                                      (with dataset spec)])
+               columns (cond
+                         ;; a map from column names to columns or their data
+                         (map? column-or-columns)
+                         (->> column-or-columns
+                              (map (fn [[k col]]
+                                     (tcc/column col {:name k}))))
+                         ;; a sequential of columns or thir data
+                         (-> column-or-columns first sequential?)
+                         column-or-columns
+                         ;; else, a single column or its data - wrap it
+                         :else
+                         [column-or-columns])
+               more-than-one (-> columns
+                                 count
+                                 (> 1))]
+           (->> columns
+                (map-indexed (fn [i col]
+                               (let [suffix (when more-than-one
+                                              (str "_" i))]
+                                 (update-colname
+                                  col
+                                  (if nam
+                                    #(concat-names nam (or % suffix))
+                                    #(or % (str spec suffix))))))))))
+       (mapcat (fn [col]
+                 (if (should-one-hot-encode? col)
+                   (one-hot col)
+                   [col])))
+       doall))
 
 (defn- columns-as-a-map [columns map-fn]
   (->> columns
@@ -165,6 +172,9 @@
   In any case, the result of the spec is turned into a sequence of named columns,
   which is conctenated to the columns from the previous specs.
   Some default naming mechanisms are invoked if column names are missing.
+
+  Columns of strings and keywords that have at most 20 distinct values
+  are one-hot-encoded by default.
 
   Eventually, the sequence of all resulting columns is returned.
   "

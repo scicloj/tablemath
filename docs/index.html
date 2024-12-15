@@ -163,8 +163,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#preface" id="toc-preface" class="nav-link active" data-scroll-target="#preface"><span class="header-section-number">1</span> Preface</a>
   <ul>
+  <li><a href="#what-is-this-about" id="toc-what-is-this-about" class="nav-link" data-scroll-target="#what-is-this-about">What is this about?</a></li>
   <li><a href="#general-info" id="toc-general-info" class="nav-link" data-scroll-target="#general-info">General info</a></li>
   <li><a href="#chapters-in-this-book" id="toc-chapters-in-this-book" class="nav-link" data-scroll-target="#chapters-in-this-book">Chapters in this book</a></li>
+  <li><a href="#a-little-example" id="toc-a-little-example" class="nav-link" data-scroll-target="#a-little-example">A little example</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -203,49 +205,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 <script src="index_files/md-default0.js" type="text/javascript"></script>
 <script src="index_files/md-default1.js" type="text/javascript"></script>
-<p>Math and stats modelling with table ergonomics</p>
 <section id="preface" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Preface</h1>
-<p>This project is an initial attempt to create a Clojure library for math and statistics which is friendly to <a href="https://github.com/techascent/tech.ml.dataset">tech.ml.dataset</a> and <a href="https://scicloj.github.io/tablecloth">Tablecloth</a> datasets and uses the functionality of <a href="https://github.com/generateme/fastmath">Fastmath</a>. It is also intended to compose well with <a href="https://scicloj.github.io/tableplot/">Tableplot</a> layered plotting. It is highly inspired by <a href="https://www.r-project.org/">R</a> and its package.</p>
+<p>Math and stats modelling with table ergonomics</p>
+<section id="what-is-this-about" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-this-about">What is this about?</h2>
+<p>This project is an initial attempt to create a Clojure library for math and statistics which is friendly to <a href="https://github.com/techascent/tech.ml.dataset">tech.ml.dataset</a> and <a href="https://scicloj.github.io/tablecloth">Tablecloth</a> datasets and uses the functionality of <a href="https://github.com/generateme/fastmath">Fastmath</a>. It is also intended to compose well with <a href="https://scicloj.github.io/tableplot/">Tableplot</a> layered plotting. It is highly inspired by <a href="https://www.r-project.org/">R</a> and its packages.</p>
 <p>In a way, it is intended to be a user-friendly compatiblity layer across these libraries.</p>
 <p>Possibly, after the details clarify, it will be merged into one of the other Scicloj libraries.</p>
-<p>Tablemath is a Clojure library for math and statistical modeling with table ergonomics, inspired by R.</p>
-<p>It composes <a href="https://scicloj.github.io/tablecloth/">Tablecloth</a> datasets with <a href="https://github.com/generateme/fastmath">Fastmath</a> modeling.</p>
-<div class="sourceClojure">
-<div class="sourceCode" id="cb1"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">-&gt;</span> ggtoydata/mpg</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    (tm/design [<span class="at">:hwy</span>]</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>               ['(tm/polynomial displ <span class="dv">2</span>)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>                '(tm/one-hot cyl)])</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    tm/lm</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    tm/summary)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="printedClojure">
-<div class="sourceCode" id="cb2"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>Residuals:</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>|      <span class="at">:min</span> |       <span class="at">:q1</span> |   <span class="at">:median</span> |      <span class="at">:q3</span> |      <span class="at">:max</span> |</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>|-----------+-----------+-----------+----------+-----------|</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>| -<span class="fl">6.502952</span> | -<span class="fl">2.199655</span> | -<span class="fl">0.442628</span> | <span class="fl">1.731071</span> | <span class="fl">13.353114</span> |</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>Coefficients:</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>|     <span class="at">:name</span> |  <span class="at">:estimate</span> |  <span class="at">:stderr</span> |  <span class="at">:t-value</span> | <span class="at">:p-value</span> |    <span class="at">:confidence-interval</span> |</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>|-----------+------------+----------+-----------+----------+-------------------------|</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>| Intercept |  <span class="fl">54.394427</span> |  <span class="fl">3.41412</span> | <span class="fl">15.932196</span> |      <span class="fl">0.0</span> |   [<span class="fl">47.667166</span> <span class="fl">61.121687</span>] |</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>|    <span class="at">:displ</span> | -<span class="fl">13.793419</span> | <span class="fl">1.632143</span> | -<span class="fl">8.451108</span> |      <span class="fl">0.0</span> | [-<span class="fl">17.009432</span> -<span class="fl">10.577406</span>] |</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>|   <span class="at">:displ2</span> |   <span class="fl">1.414259</span> | <span class="fl">0.188842</span> |  <span class="fl">7.489108</span> |      <span class="fl">0.0</span> |      [<span class="fl">1.04216</span> <span class="fl">1.786358</span>] |</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>|    <span class="at">:cyl</span>=<span class="dv">4</span> |   -<span class="fl">2.64552</span> | <span class="fl">1.748691</span> | -<span class="fl">1.512857</span> | <span class="fl">0.131701</span> |    [-<span class="fl">6.091182</span> <span class="fl">0.800141</span>] |</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>|    <span class="at">:cyl</span>=<span class="dv">6</span> |  -<span class="fl">1.296449</span> | <span class="fl">1.812616</span> | -<span class="fl">0.715236</span> | <span class="fl">0.475195</span> |     [-<span class="fl">4.86807</span> <span class="fl">2.275173</span>] |</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>|    <span class="at">:cyl</span>=<span class="dv">8</span> |  -<span class="fl">3.710565</span> | <span class="fl">2.152674</span> |   -<span class="fl">1.7237</span> | <span class="fl">0.086118</span> |    [-<span class="fl">7.952244</span> <span class="fl">0.531114</span>] |</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>F-statistic: <span class="fl">100.78409449422591</span> on degrees of freedom: {<span class="at">:residual</span> <span class="dv">228</span>, <span class="at">:model</span> <span class="dv">5</span>, <span class="at">:intercept</span> <span class="dv">1</span>}</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>p-value: <span class="fl">0.0</span></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>R2: <span class="fl">0.6884907465011598</span></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>Adjusted R2: <span class="fl">0.6816594032226765</span></span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>Residual standard error: <span class="fl">3.359709864218291</span> on <span class="dv">228</span> degrees of freedom</span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>AIC: <span class="fl">1239.1329320273044</span></span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+</section>
 <section id="general-info" class="level2">
 <h2 class="anchored" data-anchor-id="general-info">General info</h2>
 <table class="caption-top table">
@@ -278,6 +246,48 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li><a href="tablemath_book.reference.html">API reference</a></li>
 </ul>
+</section>
+<section id="a-little-example" class="level2">
+<h2 class="anchored" data-anchor-id="a-little-example">A little example</h2>
+<div class="sourceClojure">
+<div class="sourceCode" id="cb1"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">require</span> '[scicloj.metamorph.ml.toydata.ggplot <span class="at">:as</span> ggtoydata]</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>         '[scicloj.tablemath.v1.api <span class="at">:as</span> tm])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="sourceClojure">
+<div class="sourceCode" id="cb2"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">-&gt;</span> ggtoydata/mpg</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    (tm/design [<span class="at">:hwy</span>]</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>               ['(tm/polynomial displ <span class="dv">2</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>                '(tm/one-hot cyl)])</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    tm/lm</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    tm/summary)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="printedClojure">
+<div class="sourceCode" id="cb3"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>Residuals:</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>|      <span class="at">:min</span> |       <span class="at">:q1</span> |   <span class="at">:median</span> |      <span class="at">:q3</span> |      <span class="at">:max</span> |</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>|-----------+-----------+-----------+----------+-----------|</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>| -<span class="fl">6.502952</span> | -<span class="fl">2.199655</span> | -<span class="fl">0.442628</span> | <span class="fl">1.731071</span> | <span class="fl">13.353114</span> |</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>Coefficients:</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>|     <span class="at">:name</span> |  <span class="at">:estimate</span> |  <span class="at">:stderr</span> |  <span class="at">:t-value</span> | <span class="at">:p-value</span> |    <span class="at">:confidence-interval</span> |</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>|-----------+------------+----------+-----------+----------+-------------------------|</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>| Intercept |  <span class="fl">54.394427</span> |  <span class="fl">3.41412</span> | <span class="fl">15.932196</span> |      <span class="fl">0.0</span> |   [<span class="fl">47.667166</span> <span class="fl">61.121687</span>] |</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>|    <span class="at">:displ</span> | -<span class="fl">13.793419</span> | <span class="fl">1.632143</span> | -<span class="fl">8.451108</span> |      <span class="fl">0.0</span> | [-<span class="fl">17.009432</span> -<span class="fl">10.577406</span>] |</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>|   <span class="at">:displ2</span> |   <span class="fl">1.414259</span> | <span class="fl">0.188842</span> |  <span class="fl">7.489108</span> |      <span class="fl">0.0</span> |      [<span class="fl">1.04216</span> <span class="fl">1.786358</span>] |</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>|    <span class="at">:cyl</span>=<span class="dv">4</span> |   -<span class="fl">2.64552</span> | <span class="fl">1.748691</span> | -<span class="fl">1.512857</span> | <span class="fl">0.131701</span> |    [-<span class="fl">6.091182</span> <span class="fl">0.800141</span>] |</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>|    <span class="at">:cyl</span>=<span class="dv">6</span> |  -<span class="fl">1.296449</span> | <span class="fl">1.812616</span> | -<span class="fl">0.715236</span> | <span class="fl">0.475195</span> |     [-<span class="fl">4.86807</span> <span class="fl">2.275173</span>] |</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>|    <span class="at">:cyl</span>=<span class="dv">8</span> |  -<span class="fl">3.710565</span> | <span class="fl">2.152674</span> |   -<span class="fl">1.7237</span> | <span class="fl">0.086118</span> |    [-<span class="fl">7.952244</span> <span class="fl">0.531114</span>] |</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>F-statistic: <span class="fl">100.78409449422591</span> on degrees of freedom: {<span class="at">:residual</span> <span class="dv">228</span>, <span class="at">:model</span> <span class="dv">5</span>, <span class="at">:intercept</span> <span class="dv">1</span>}</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>p-value: <span class="fl">0.0</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>R2: <span class="fl">0.6884907465011598</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>Adjusted R2: <span class="fl">0.6816594032226765</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>Residual standard error: <span class="fl">3.359709864218291</span> on <span class="dv">228</span> degrees of freedom</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>AIC: <span class="fl">1239.1329320273044</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <div style="background-color:grey;height:2px;width:100%;"></div>
 <div><pre><small><small>source: <a href="https://github.com/scicloj/tablema/blob/main/notebooks/index.clj">notebooks/index.clj</a></small></small></pre></div>
 

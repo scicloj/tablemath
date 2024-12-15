@@ -215,7 +215,7 @@
   It can be summarized by `summary`.
 
   See [fastmath.ml.regression.lm](https://generateme.github.io/fastmath/clay/ml.html#lm)
-  for options."
+  for `options`."
 
   ([dataset]
    (lm dataset nil))

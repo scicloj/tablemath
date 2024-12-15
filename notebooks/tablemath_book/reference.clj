@@ -61,11 +61,13 @@
 
 ;; #### Examples
 
-(tm/design (tc/dataset {"w" [:A :B :C]
+(tm/design (tc/dataset {"v" [4 5 6]
+                        :w [:A :B :C]
                         :x (range 3)
                         :y (reverse (range 3))})
            [:y]
-           ["w"
+           [:v
+            :w
             :x
             '(tcc/+ x y)
             [:z '(tcc/+ x y)]
@@ -76,14 +78,10 @@
               :b (tcc/* x y)}
             [:p '{:a (tcc/+ x y)
                   :b (tcc/* x y)}]
-            '[(tcc/column (tcc/+ x y)
-                          {:name :c})
-              (tcc/column (tcc/* x y)
-                          {:name :d})]
-            [:p '[(tcc/column (tcc/+ x y)
-                              {:name :c})
-                  (tcc/column (tcc/* x y)
-                              {:name :d})]]])
+            '[(tcc/column (tcc/+ x y) {:name :c})
+              (tcc/column (tcc/* x y) {:name :d})]
+            [:p '[(tcc/column (tcc/+ x y) {:name :c})
+                  (tcc/column (tcc/* x y) {:name :d})]]])
 
 (utils/include-fnvar-as-section #'tm/polynomial)
 

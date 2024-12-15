@@ -18,3 +18,6 @@ Possibly, after the details clarify, it will be merged into one of the other Sci
 |Deps |[![Clojars Project](https://img.shields.io/clojars/v/org.scicloj/tablemath.svg)](https://clojars.org/org.scicloj/tablemath)|
 |License |[EPLv2.0](https://github.com/scicloj/tablemath/blob/main/LICENSE)|
 |Status |🛠experimental🛠|
+|Dev chat|[#tableplot-dev](https://clojurians.zulipchat.com/#narrow/channel/474332-tablemath-dev) at [Clojurians Zulip](https://scicloj.github.io/docs/community/chat/)|
+|User chat|[#data-science](https://clojurians.zulipchat.com/#narrow/stream/151924-data-science) at [Clojurians Zulip](https://scicloj.github.io/docs/community/chat/)|
+

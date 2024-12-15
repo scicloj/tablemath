@@ -219,6 +219,6 @@
     (tm/design [:traffic]
                ['(tm/one-hot day-of-week
                              {:values days-of-week
-                              :include-last true})])
+                              :include-first true})])
     (tm/lm {:intercept? false})
     tm/summary)

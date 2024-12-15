@@ -288,66 +288,71 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul></li>
 </ul>
 <p>In any case, the result of the spec is turned into a sequence of named columns, which is conctenated to the columns from the previous specs. Some default naming mechanisms are invoked if column names are missing.</p>
+<p>Columns of strings and keywords that have at most 20 distinct values are one-hot-encoded by default.</p>
 <p>Eventually, the sequence of all resulting columns is returned.</p>
 <section id="examples-1" class="level4">
 <h4 class="anchored" data-anchor-id="examples-1">Examples</h4>
 <p>Note the naming of the resulting columns, and note they can sequentially depend on each other.</p>
 <div class="sourceClojure">
-<div class="sourceCode" id="cb6"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>(tm/columns-with (tc/dataset {<span class="st">"w"</span> [<span class="at">:A</span> <span class="at">:B</span> <span class="at">:C</span>]</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>                              <span class="at">:x</span> (<span class="kw">range</span> <span class="dv">3</span>)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>                              <span class="at">:y</span> (<span class="kw">reverse</span> (<span class="kw">range</span> <span class="dv">3</span>))})</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>                 [<span class="st">"w"</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>                  <span class="at">:x</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>                  '(tcc/+ x y)</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>                  [<span class="at">:z</span> '(tcc/+ x y)]</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>                  [<span class="at">:z1000</span> '(tcc/* z <span class="dv">1000</span>)]</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>                  '((<span class="kw">juxt</span> tcc/+ tcc/*) x y)</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>                  [<span class="at">:p</span> '((<span class="kw">juxt</span> tcc/+ tcc/*) x y)]</span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>                  '{<span class="at">:a</span> (tcc/+ x y)</span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>                    <span class="at">:b</span> (tcc/* x y)}</span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>                  [<span class="at">:p</span> '{<span class="at">:a</span> (tcc/+ x y)</span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>                        <span class="at">:b</span> (tcc/* x y)}]</span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>                  '[(tcc/column (tcc/+ x y) {<span class="at">:name</span> <span class="at">:c</span>})</span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>                    (tcc/column (tcc/* x y) {<span class="at">:name</span> <span class="at">:d</span>})]</span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>                  [<span class="at">:p</span> '[(tcc/column (tcc/+ x y) {<span class="at">:name</span> <span class="at">:c</span>})</span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>                        (tcc/column (tcc/* x y) {<span class="at">:name</span> <span class="at">:d</span>})]]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>(tm/columns-with (tc/dataset {<span class="st">"v"</span> [<span class="dv">4</span> <span class="dv">5</span> <span class="dv">6</span>]</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>                              <span class="at">:w</span> [<span class="at">:A</span> <span class="at">:B</span> <span class="at">:C</span>]</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>                              <span class="at">:x</span> (<span class="kw">range</span> <span class="dv">3</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>                              <span class="at">:y</span> (<span class="kw">reverse</span> (<span class="kw">range</span> <span class="dv">3</span>))})</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>                 [<span class="at">:v</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>                  <span class="at">:w</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>                  <span class="at">:x</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>                  '(tcc/+ x y)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>                  [<span class="at">:z</span> '(tcc/+ x y)]</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>                  [<span class="at">:z1000</span> '(tcc/* z <span class="dv">1000</span>)]</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>                  '((<span class="kw">juxt</span> tcc/+ tcc/*) x y)</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>                  [<span class="at">:p</span> '((<span class="kw">juxt</span> tcc/+ tcc/*) x y)]</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>                  '{<span class="at">:a</span> (tcc/+ x y)</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>                    <span class="at">:b</span> (tcc/* x y)}</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>                  [<span class="at">:p</span> '{<span class="at">:a</span> (tcc/+ x y)</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>                        <span class="at">:b</span> (tcc/* x y)}]</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>                  '[(tcc/column (tcc/+ x y) {<span class="at">:name</span> <span class="at">:c</span>})</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>                    (tcc/column (tcc/* x y) {<span class="at">:name</span> <span class="at">:d</span>})]</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>                  [<span class="at">:p</span> '[(tcc/column (tcc/+ x y) {<span class="at">:name</span> <span class="at">:c</span>})</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>                        (tcc/column (tcc/* x y) {<span class="at">:name</span> <span class="at">:d</span>})]]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="printedClojure">
-<div class="sourceCode" id="cb7"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>(#tech.v3.dataset.column&lt;keyword&gt;[<span class="dv">3</span>]</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>w</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>[<span class="at">:A</span>, <span class="at">:B</span>, <span class="at">:C</span>] #tech.v3.dataset.column&lt;int64&gt;[<span class="dv">3</span>]</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="at">:x</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>[<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>] #tech.v3.dataset.column&lt;int64&gt;[<span class="dv">3</span>]</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>(tcc/+ x y)</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>[<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>] #tech.v3.dataset.column&lt;int64&gt;[<span class="dv">3</span>]</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="at">:z</span></span>
+<div class="sourceCode" id="cb7"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>(#tech.v3.dataset.column&lt;int64&gt;[<span class="dv">3</span>]</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="at">:w</span>=<span class="at">:B</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>[<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>] #tech.v3.dataset.column&lt;int64&gt;[<span class="dv">3</span>]</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="at">:w</span>=<span class="at">:C</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>[<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>] #tech.v3.dataset.column&lt;int64&gt;[<span class="dv">3</span>]</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="at">:x</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>[<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>] #tech.v3.dataset.column&lt;int64&gt;[<span class="dv">3</span>]</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>(tcc/+ x y)</span>
 <span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>[<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>] #tech.v3.dataset.column&lt;int64&gt;[<span class="dv">3</span>]</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="at">:z1000</span></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>[<span class="dv">2000</span>, <span class="dv">2000</span>, <span class="dv">2000</span>] #tech.v3.dataset.column&lt;int64&gt;[<span class="dv">3</span>]</span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>((<span class="kw">juxt</span> tcc/+ tcc/*) x y)_0</span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>[<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>] #tech.v3.dataset.column&lt;int64&gt;[<span class="dv">3</span>]</span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>((<span class="kw">juxt</span> tcc/+ tcc/*) x y)_1</span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>[<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>] #tech.v3.dataset.column&lt;int64&gt;[<span class="dv">3</span>]</span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="at">:p</span>_0</span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>[<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>] #tech.v3.dataset.column&lt;int64&gt;[<span class="dv">3</span>]</span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="at">:p</span>_1</span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>[<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>] #tech.v3.dataset.column&lt;int64&gt;[<span class="dv">3</span>]</span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="at">:a</span></span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>[<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>] #tech.v3.dataset.column&lt;int64&gt;[<span class="dv">3</span>]</span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="at">:b</span></span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>[<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>] #tech.v3.dataset.column&lt;int64&gt;[<span class="dv">3</span>]</span>
-<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a><span class="at">:pa</span></span>
-<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>[<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>] #tech.v3.dataset.column&lt;int64&gt;[<span class="dv">3</span>]</span>
-<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a><span class="at">:pb</span></span>
-<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>[<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>] #tech.v3.dataset.column&lt;int64&gt;[<span class="dv">3</span>]</span>
-<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a><span class="at">:c</span></span>
-<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>[<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>] #tech.v3.dataset.column&lt;int64&gt;[<span class="dv">3</span>]</span>
-<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a><span class="at">:d</span></span>
-<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>[<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>] #tech.v3.dataset.column&lt;int64&gt;[<span class="dv">3</span>]</span>
-<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a><span class="at">:pc</span></span>
-<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>[<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>] #tech.v3.dataset.column&lt;int64&gt;[<span class="dv">3</span>]</span>
-<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a><span class="at">:pd</span></span>
-<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>[<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="at">:z</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>[<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>] #tech.v3.dataset.column&lt;int64&gt;[<span class="dv">3</span>]</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="at">:z1000</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>[<span class="dv">2000</span>, <span class="dv">2000</span>, <span class="dv">2000</span>] #tech.v3.dataset.column&lt;int64&gt;[<span class="dv">3</span>]</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>((<span class="kw">juxt</span> tcc/+ tcc/*) x y)_0</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>[<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>] #tech.v3.dataset.column&lt;int64&gt;[<span class="dv">3</span>]</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>((<span class="kw">juxt</span> tcc/+ tcc/*) x y)_1</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>[<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>] #tech.v3.dataset.column&lt;int64&gt;[<span class="dv">3</span>]</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="at">:p</span>_0</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>[<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>] #tech.v3.dataset.column&lt;int64&gt;[<span class="dv">3</span>]</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="at">:p</span>_1</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>[<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>] #tech.v3.dataset.column&lt;int64&gt;[<span class="dv">3</span>]</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="at">:a</span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>[<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>] #tech.v3.dataset.column&lt;int64&gt;[<span class="dv">3</span>]</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a><span class="at">:b</span></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>[<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>] #tech.v3.dataset.column&lt;int64&gt;[<span class="dv">3</span>]</span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a><span class="at">:pa</span></span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>[<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>] #tech.v3.dataset.column&lt;int64&gt;[<span class="dv">3</span>]</span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a><span class="at">:pb</span></span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>[<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>] #tech.v3.dataset.column&lt;int64&gt;[<span class="dv">3</span>]</span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a><span class="at">:c</span></span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>[<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>] #tech.v3.dataset.column&lt;int64&gt;[<span class="dv">3</span>]</span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a><span class="at">:d</span></span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>[<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>] #tech.v3.dataset.column&lt;int64&gt;[<span class="dv">3</span>]</span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a><span class="at">:pc</span></span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>[<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>] #tech.v3.dataset.column&lt;int64&gt;[<span class="dv">3</span>]</span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a><span class="at">:pd</span></span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a>[<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
@@ -359,44 +364,43 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="examples-2" class="level4">
 <h4 class="anchored" data-anchor-id="examples-2">Examples</h4>
 <div class="sourceClojure">
-<div class="sourceCode" id="cb8"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>(tm/design (tc/dataset {<span class="st">"w"</span> [<span class="at">:A</span> <span class="at">:B</span> <span class="at">:C</span>]</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">:x</span> (<span class="kw">range</span> <span class="dv">3</span>)</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>                        <span class="at">:y</span> (<span class="kw">reverse</span> (<span class="kw">range</span> <span class="dv">3</span>))})</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>           [<span class="at">:y</span>]</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>           [<span class="st">"w"</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">:x</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>            '(tcc/+ x y)</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>            [<span class="at">:z</span> '(tcc/+ x y)]</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>            [<span class="at">:z1000</span> '(tcc/* z <span class="dv">1000</span>)]</span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>            '((<span class="kw">juxt</span> tcc/+ tcc/*) x y)</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>            [<span class="at">:p</span> '((<span class="kw">juxt</span> tcc/+ tcc/*) x y)]</span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>            '{<span class="at">:a</span> (tcc/+ x y)</span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>              <span class="at">:b</span> (tcc/* x y)}</span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>            [<span class="at">:p</span> '{<span class="at">:a</span> (tcc/+ x y)</span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>                  <span class="at">:b</span> (tcc/* x y)}]</span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>            '[(tcc/column (tcc/+ x y)</span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>                          {<span class="at">:name</span> <span class="at">:c</span>})</span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>              (tcc/column (tcc/* x y)</span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>                          {<span class="at">:name</span> <span class="at">:d</span>})]</span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>            [<span class="at">:p</span> '[(tcc/column (tcc/+ x y)</span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>                              {<span class="at">:name</span> <span class="at">:c</span>})</span>
-<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>                  (tcc/column (tcc/* x y)</span>
-<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>                              {<span class="at">:name</span> <span class="at">:d</span>})]]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>(tm/design (tc/dataset {<span class="st">"v"</span> [<span class="dv">4</span> <span class="dv">5</span> <span class="dv">6</span>]</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">:w</span> [<span class="at">:A</span> <span class="at">:B</span> <span class="at">:C</span>]</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>                        <span class="at">:x</span> (<span class="kw">range</span> <span class="dv">3</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">:y</span> (<span class="kw">reverse</span> (<span class="kw">range</span> <span class="dv">3</span>))})</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>           [<span class="at">:y</span>]</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>           [<span class="at">:v</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">:w</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">:x</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>            '(tcc/+ x y)</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>            [<span class="at">:z</span> '(tcc/+ x y)]</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>            [<span class="at">:z1000</span> '(tcc/* z <span class="dv">1000</span>)]</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>            '((<span class="kw">juxt</span> tcc/+ tcc/*) x y)</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>            [<span class="at">:p</span> '((<span class="kw">juxt</span> tcc/+ tcc/*) x y)]</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>            '{<span class="at">:a</span> (tcc/+ x y)</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>              <span class="at">:b</span> (tcc/* x y)}</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>            [<span class="at">:p</span> '{<span class="at">:a</span> (tcc/+ x y)</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>                  <span class="at">:b</span> (tcc/* x y)}]</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>            '[(tcc/column (tcc/+ x y) {<span class="at">:name</span> <span class="at">:c</span>})</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>              (tcc/column (tcc/* x y) {<span class="at">:name</span> <span class="at">:d</span>})]</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>            [<span class="at">:p</span> '[(tcc/column (tcc/+ x y) {<span class="at">:name</span> <span class="at">:c</span>})</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>                  (tcc/column (tcc/* x y) {<span class="at">:name</span> <span class="at">:d</span>})]]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="clay-dataset">
-<p>_unnamed [3 18]:</p>
+<p>_unnamed [3 19]:</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 2%">
+<col style="width: 4%">
+<col style="width: 4%">
 <col style="width: 2%">
-<col style="width: 2%">
-<col style="width: 9%">
+<col style="width: 8%">
 <col style="width: 2%">
 <col style="width: 5%">
-<col style="width: 19%">
-<col style="width: 19%">
-<col style="width: 4%">
-<col style="width: 4%">
+<col style="width: 18%">
+<col style="width: 18%">
+<col style="width: 3%">
+<col style="width: 3%">
 <col style="width: 2%">
 <col style="width: 2%">
 <col style="width: 3%">
@@ -409,7 +413,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <thead>
 <tr class="header">
 <th style="text-align: right;">:y</th>
-<th>w</th>
+<th style="text-align: right;">:w=:B</th>
+<th style="text-align: right;">:w=:C</th>
 <th style="text-align: right;">:x</th>
 <th style="text-align: right;">(tcc/+ x y)</th>
 <th style="text-align: right;">:z</th>
@@ -431,7 +436,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tbody>
 <tr class="odd">
 <td style="text-align: right;">2</td>
-<td>:A</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">2</td>
 <td style="text-align: right;">2</td>
@@ -451,7 +457,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td style="text-align: right;">1</td>
-<td>:B</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">2</td>
 <td style="text-align: right;">2</td>
@@ -471,7 +478,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="odd">
 <td style="text-align: right;">0</td>
-<td>:C</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
 <td style="text-align: right;">2</td>
 <td style="text-align: right;">2</td>
 <td style="text-align: right;">2</td>
@@ -521,11 +529,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="one-hot" class="level3">
 <h3 class="anchored" data-anchor-id="one-hot"><code>one-hot</code></h3>
 <p><code>[column]</code></p>
-<p><code>[column {:keys [values include-last], :or {values (distinct column), include-last false}}]</code></p>
+<p><code>[column {:keys [values include-first], :or {values (distinct column), include-first false}}]</code></p>
 <p>Given a <code>column</code>, create a vector of integer binary columns, each encoding the presence of absence of one of its values.</p>
 <p>E.g., if the <code>column</code> name is <code>:x</code>, and one of the values is <code>:A</code>, then a resulting binary column will have 1 in all the rows where <code>column</code> has <code>:A</code>.</p>
-<p>The sequence of values to generate the binary columns is defined as follows: either the value provided for the <code>:values</code> key if present, or the distinct values in <code>column</code> in their order of appearance. If the value of the option key <code>:include-last</code> is <code>false</code> (which is the default), then the last value is ommitted. This is handy for avoiding <a href="https://en.wikipedia.org/wiki/Multicollinearity">multicollinearity</a> in linear regression.</p>
-<p>Supported options: - <code>:values</code> - the values to encode as columns - default <code>nil</code> - <code>:include-last</code> - should the last value be included - default <code>false</code></p>
+<p>The sequence of values to generate the binary columns is defined as follows: either the value provided for the <code>:values</code> key if present, or the distinct values in <code>column</code> in their order of appearance. If the value of the option key <code>:include-first</code> is <code>false</code> (which is the default), then the first value is ommitted. This is handy for avoiding <a href="https://en.wikipedia.org/wiki/Multicollinearity">multicollinearity</a> in linear regression.</p>
+<p>Supported options: - <code>:values</code> - the values to encode as columns - default <code>nil</code> - <code>:include-first</code> - should the first value be included - default <code>false</code></p>
 <section id="examples-4" class="level4">
 <h4 class="anchored" data-anchor-id="examples-4">Examples</h4>
 <div class="sourceClojure">
@@ -534,10 +542,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="printedClojure">
 <div class="sourceCode" id="cb12"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>[#tech.v3.dataset.column&lt;int64&gt;[<span class="dv">6</span>]</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="at">:x</span>=<span class="at">:B</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>] #tech.v3.dataset.column&lt;int64&gt;[<span class="dv">6</span>]</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="at">:x</span>=<span class="at">:A</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>[<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="at">:x</span>=<span class="at">:A</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>[<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>] #tech.v3.dataset.column&lt;int64&gt;[<span class="dv">6</span>]</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="at">:x</span>=<span class="at">:C</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>[<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="sourceClojure">
 <div class="sourceCode" id="cb13"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>(tm/one-hot (tcc/column [<span class="at">:B</span> <span class="at">:A</span> <span class="at">:A</span> <span class="at">:B</span> <span class="at">:B</span> <span class="at">:C</span>]</span>
@@ -546,16 +554,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="printedClojure">
 <div class="sourceCode" id="cb14"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>[#tech.v3.dataset.column&lt;int64&gt;[<span class="dv">6</span>]</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="at">:x</span>=<span class="at">:A</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>[<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>] #tech.v3.dataset.column&lt;int64&gt;[<span class="dv">6</span>]</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="at">:x</span>=<span class="at">:B</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="at">:x</span>=<span class="at">:B</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>] #tech.v3.dataset.column&lt;int64&gt;[<span class="dv">6</span>]</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="at">:x</span>=<span class="at">:C</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>[<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="sourceClojure">
 <div class="sourceCode" id="cb15"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>(tm/one-hot (tcc/column [<span class="at">:B</span> <span class="at">:A</span> <span class="at">:A</span> <span class="at">:B</span> <span class="at">:B</span> <span class="at">:C</span>]</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>                        {<span class="at">:name</span> <span class="at">:x</span>})</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>            {<span class="at">:values</span> [<span class="at">:A</span> <span class="at">:B</span> <span class="at">:C</span>]</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">:include-last</span> <span class="va">true</span>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">:include-first</span> <span class="va">true</span>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="printedClojure">
 <div class="sourceCode" id="cb16"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>[#tech.v3.dataset.column&lt;int64&gt;[<span class="dv">6</span>]</span>
@@ -573,7 +581,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><code>[dataset]</code></p>
 <p><code>[dataset options]</code></p>
 <p>Compute a linear regression model for <code>dataset</code>. The first column marked as target is the target. All the columns unmarked as target are the features. The resulting model is of type <code>fastmath.ml.regression.LMData</code>, a generated by <a href="https://github.com/generateme/fastmath">Fastmath</a>. It can be summarized by <a href="#summary"><code>summary</code></a>.</p>
-<p>See <a href="https://generateme.github.io/fastmath/clay/ml.html#lm">fastmath.ml.regression.lm</a> for options.</p>
+<p>See <a href="https://generateme.github.io/fastmath/clay/ml.html#lm">fastmath.ml.regression.lm</a> for <code>options</code>.</p>
 <section id="examples-5" class="level4">
 <h4 class="anchored" data-anchor-id="examples-5">Examples:</h4>
 <section id="linear-relationship" class="level5">
@@ -594,7 +602,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    plotly/layer-point)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div style="height:400px;width:100%;"><script>Plotly.newPlot(document.currentScript.parentElement,
-              [{"y":[-0.7970075505915686,1.7665667740284374,3.1979934765917326,4.417002403708457,7.820567813898318,8.119007444588386,9.474646592096256,11.230997856221647,13.533293752857292],"r":null,"name":"","fill":null,"mode":"markers","width":null,"type":"scatter","theta":null,"z":null,"lon":null,"lat":null,"x":[0,1,2,3,4,5,6,7,8],"text":null}], {"width":500,"height":400,"margin":{"t":25},"automargin":false,"plot_bgcolor":"rgb(235,235,235)","xaxis":{"gridcolor":"rgb(255,255,255)","title":"x"},"yaxis":{"gridcolor":"rgb(255,255,255)","title":"y"},"title":null}, {});</script></div>
+              [{"y":[-1.2206545968779698,-0.6627868017135964,1.6994417743696602,4.003185102685113,5.258840411733708,8.339561115019324,11.668609057473377,13.127363139381183,15.557711822987455],"r":null,"name":"","fill":null,"mode":"markers","width":null,"type":"scatter","theta":null,"z":null,"lon":null,"lat":null,"x":[0,1,2,3,4,5,6,7,8],"text":null}], {"width":500,"height":400,"margin":{"t":25},"automargin":false,"plot_bgcolor":"rgb(235,235,235)","xaxis":{"gridcolor":"rgb(255,255,255)","title":"x"},"yaxis":{"gridcolor":"rgb(255,255,255)","title":"y"},"title":null}, {});</script></div>
 <p>Note how the coefficients fit the way we generated the data:</p>
 <div class="sourceClojure">
 <div class="sourceCode" id="cb19"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">-&gt;</span> linear-toydata</span>
@@ -606,24 +614,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="printedClojure">
 <div class="sourceCode" id="cb20"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>Residuals:</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>|     <span class="at">:min</span> |       <span class="at">:q1</span> |   <span class="at">:median</span> |      <span class="at">:q3</span> |     <span class="at">:max</span> |</span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>|----------+-----------+-----------+----------+----------|</span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>| -<span class="fl">0.52825</span> | -<span class="fl">0.433154</span> | -<span class="fl">0.109719</span> | <span class="fl">0.270952</span> | <span class="fl">1.291338</span> |</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>|     <span class="at">:min</span> |       <span class="at">:q1</span> |   <span class="at">:median</span> |      <span class="at">:q3</span> |    <span class="at">:max</span> |</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>|----------+-----------+-----------+----------+---------|</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>| -<span class="fl">1.16019</span> | -<span class="fl">0.369093</span> | -<span class="fl">0.203201</span> | <span class="fl">0.556199</span> | <span class="fl">1.21089</span> |</span>
 <span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>Coefficients:</span>
 <span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>|     <span class="at">:name</span> | <span class="at">:estimate</span> |  <span class="at">:stderr</span> |  <span class="at">:t-value</span> | <span class="at">:p-value</span> | <span class="at">:confidence-interval</span> |</span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>|-----------+-----------+----------+-----------+----------+----------------------|</span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>| Intercept | -<span class="fl">0.268757</span> | <span class="fl">0.378313</span> |  -<span class="fl">0.71041</span> | <span class="fl">0.500426</span> | [-<span class="fl">1.163326</span> <span class="fl">0.625811</span>] |</span>
-<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>|        <span class="at">:x</span> |  <span class="fl">1.699497</span> | <span class="fl">0.079462</span> | <span class="fl">21.387629</span> |      <span class="fl">0.0</span> |    [<span class="fl">1.5116</span> <span class="fl">1.887394</span>] |</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>|     <span class="at">:name</span> | <span class="at">:estimate</span> |  <span class="at">:stderr</span> |  <span class="at">:t-value</span> | <span class="at">:p-value</span> |  <span class="at">:confidence-interval</span> |</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>|-----------+-----------+----------+-----------+----------+-----------------------|</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>| Intercept | -<span class="fl">2.431545</span> | <span class="fl">0.464039</span> | -<span class="fl">5.239956</span> | <span class="fl">0.001199</span> | [-<span class="fl">3.528823</span> -<span class="fl">1.334267</span>] |</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>|        <span class="at">:x</span> |  <span class="fl">2.212644</span> | <span class="fl">0.097468</span> | <span class="fl">22.701298</span> |      <span class="fl">0.0</span> |   [<span class="fl">1.982169</span> <span class="fl">2.443118</span>] |</span>
 <span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>F-statistic: <span class="fl">457.43069498931635</span> on degrees of freedom: {<span class="at">:residual</span> <span class="dv">7</span>, <span class="at">:model</span> <span class="dv">1</span>, <span class="at">:intercept</span> <span class="dv">1</span>}</span>
-<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>p-value: <span class="fl">1.230591201162312E-7</span></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>F-statistic: <span class="fl">515.3489255655971</span> on degrees of freedom: {<span class="at">:residual</span> <span class="dv">7</span>, <span class="at">:model</span> <span class="dv">1</span>, <span class="at">:intercept</span> <span class="dv">1</span>}</span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>p-value: <span class="fl">8.150586716659802E-8</span></span>
 <span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>R2: <span class="fl">0.9849277834658172</span></span>
-<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>Adjusted R2: <span class="fl">0.9827746096752197</span></span>
-<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>Residual standard error: <span class="fl">0.6155074754548385</span> on <span class="dv">7</span> degrees of freedom</span>
-<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>AIC: <span class="fl">20.54351635745458</span></span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>R2: <span class="fl">0.9865989960783007</span></span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>Adjusted R2: <span class="fl">0.9846845669466294</span></span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>Residual standard error: <span class="fl">0.7549817203282593</span> on <span class="dv">7</span> degrees of freedom</span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>AIC: <span class="fl">24.219952395940595</span></span>
 <span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
@@ -640,14 +648,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>                           (<span class="kw">*</span> <span class="dv">4</span> x)</span>
 <span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>                           (<span class="kw">*</span> -<span class="dv">9</span> x x)</span>
 <span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>                           (<span class="kw">*</span> x x x)</span>
-<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>                           (<span class="kw">*</span> <span class="dv">10</span> (<span class="kw">rand</span>)))))))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>                           (<span class="kw">*</span> <span class="dv">3</span> (<span class="kw">rand</span>)))))))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="sourceClojure">
 <div class="sourceCode" id="cb22"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">-&gt;</span> cubic-toydata</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    plotly/layer-point)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div style="height:400px;width:100%;"><script>Plotly.newPlot(document.currentScript.parentElement,
-              [{"y":[53.79261099684752,54.272174040870404,33.83368201077693,16.82519263168649,-10.022588560383598,-24.460105838280825,-31.963540759088062,-16.881910255360165,19.190239103610914],"r":null,"name":"","fill":null,"mode":"markers","width":null,"type":"scatter","theta":null,"z":null,"lon":null,"lat":null,"x":[0,1,2,3,4,5,6,7,8],"text":null}], {"width":500,"height":400,"margin":{"t":25},"automargin":false,"plot_bgcolor":"rgb(235,235,235)","xaxis":{"gridcolor":"rgb(255,255,255)","title":"x"},"yaxis":{"gridcolor":"rgb(255,255,255)","title":"y"},"title":null}, {});</script></div>
+              [{"y":[52.81695863740411,48.92446032906917,31.85973999387303,9.914705216015665,-12.793722166832634,-29.58868740534439,-32.71283297747072,-17.346277878714066,18.066672530871205],"r":null,"name":"","fill":null,"mode":"markers","width":null,"type":"scatter","theta":null,"z":null,"lon":null,"lat":null,"x":[0,1,2,3,4,5,6,7,8],"text":null}], {"width":500,"height":400,"margin":{"t":25},"automargin":false,"plot_bgcolor":"rgb(235,235,235)","xaxis":{"gridcolor":"rgb(255,255,255)","title":"x"},"yaxis":{"gridcolor":"rgb(255,255,255)","title":"y"},"title":null}, {});</script></div>
 <p>Note how the coefficients fit the way we generated the data:</p>
 <div class="sourceClojure">
 <div class="sourceCode" id="cb23"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">-&gt;</span> cubic-toydata</span>
@@ -661,24 +669,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>|      <span class="at">:min</span> |       <span class="at">:q1</span> |   <span class="at">:median</span> |      <span class="at">:q3</span> |     <span class="at">:max</span> |</span>
 <span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>|-----------+-----------+-----------+----------+----------|</span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>| -<span class="fl">2.895093</span> | -<span class="fl">1.376503</span> | -<span class="fl">0.349428</span> | <span class="fl">1.630552</span> | <span class="fl">2.362941</span> |</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>| -<span class="fl">0.982343</span> | -<span class="fl">0.553104</span> | -<span class="fl">0.029101</span> | <span class="fl">0.437345</span> | <span class="fl">1.505786</span> |</span>
 <span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>Coefficients:</span>
 <span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>|     <span class="at">:name</span> | <span class="at">:estimate</span> |  <span class="at">:stderr</span> |   <span class="at">:t-value</span> | <span class="at">:p-value</span> |   <span class="at">:confidence-interval</span> |</span>
-<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>|-----------+-----------+----------+------------+----------+------------------------|</span>
-<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>| Intercept | <span class="fl">54.419507</span> |  <span class="fl">2.08111</span> |   <span class="fl">26.14927</span> |   <span class="fl">2.0E-6</span> |   [<span class="fl">49.069843</span> <span class="fl">59.76917</span>] |</span>
-<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>|        <span class="at">:x</span> |  <span class="fl">6.367613</span> | <span class="fl">2.401902</span> |   <span class="fl">2.651072</span> | <span class="fl">0.045368</span> |   [<span class="fl">0.193328</span> <span class="fl">12.541897</span>] |</span>
-<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>|       <span class="at">:x2</span> | -<span class="fl">9.695003</span> | <span class="fl">0.725196</span> | -<span class="fl">13.368801</span> |   <span class="fl">4.2E-5</span> | [-<span class="fl">11.559179</span> -<span class="fl">7.830827</span>] |</span>
-<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>|       <span class="at">:x3</span> |  <span class="fl">1.044257</span> | <span class="fl">0.059485</span> |  <span class="fl">17.555086</span> |   <span class="fl">1.1E-5</span> |    [<span class="fl">0.891347</span> <span class="fl">1.197167</span>] |</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>|     <span class="at">:name</span> | <span class="at">:estimate</span> |  <span class="at">:stderr</span> |  <span class="at">:t-value</span> | <span class="at">:p-value</span> |  <span class="at">:confidence-interval</span> |</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>|-----------+-----------+----------+-----------+----------+-----------------------|</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>| Intercept | <span class="fl">53.180145</span> | <span class="fl">0.868218</span> | <span class="fl">61.252032</span> |      <span class="fl">0.0</span> | [<span class="fl">50.948318</span> <span class="fl">55.411971</span>] |</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>|        <span class="at">:x</span> |  <span class="fl">3.014623</span> |  <span class="fl">1.00205</span> |  <span class="fl">3.008457</span> | <span class="fl">0.029808</span> |   [<span class="fl">0.438773</span> <span class="fl">5.590474</span>] |</span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>|       <span class="at">:x2</span> | -<span class="fl">8.808581</span> | <span class="fl">0.302545</span> | -<span class="fl">29.11498</span> |   <span class="fl">1.0E-6</span> | [-<span class="fl">9.586297</span> -<span class="fl">8.030865</span>] |</span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>|       <span class="at">:x3</span> |  <span class="fl">0.986839</span> | <span class="fl">0.024816</span> | <span class="fl">39.765656</span> |      <span class="fl">0.0</span> |   [<span class="fl">0.923047</span> <span class="fl">1.050632</span>] |</span>
 <span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>F-statistic: <span class="fl">569.7003984751414</span> on degrees of freedom: {<span class="at">:residual</span> <span class="dv">5</span>, <span class="at">:model</span> <span class="dv">3</span>, <span class="at">:intercept</span> <span class="dv">1</span>}</span>
-<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>p-value: <span class="fl">9.352140781793139E-7</span></span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>F-statistic: <span class="fl">3226.2782840468035</span> on degrees of freedom: {<span class="at">:residual</span> <span class="dv">5</span>, <span class="at">:model</span> <span class="dv">3</span>, <span class="at">:intercept</span> <span class="dv">1</span>}</span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>p-value: <span class="fl">1.2338335575456938E-8</span></span>
 <span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>R2: <span class="fl">0.9970830193611999</span></span>
-<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a>Adjusted R2: <span class="fl">0.9953328309779199</span></span>
-<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a>Residual standard error: <span class="fl">2.2459659261782927</span> on <span class="dv">5</span> degrees of freedom</span>
-<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a>AIC: <span class="fl">44.81525594914397</span></span>
+<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>R2: <span class="fl">0.9994836756226905</span></span>
+<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a>Adjusted R2: <span class="fl">0.9991738809963048</span></span>
+<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a>Residual standard error: <span class="fl">0.9369947261489885</span> on <span class="dv">5</span> degrees of freedom</span>
+<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a>AIC: <span class="fl">29.07941635992058</span></span>
 <span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
@@ -690,20 +698,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="sourceClojure">
 <div class="sourceCode" id="cb26"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>(<span class="bu">def</span><span class="fu"> categorical-toydata</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  (<span class="kw">-&gt;</span> {<span class="at">:t</span> (<span class="kw">range</span> <span class="dv">21</span>)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  (<span class="kw">-&gt;</span> {<span class="at">:t</span> (<span class="kw">range</span> <span class="dv">18</span>)</span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">:day-of-week</span> (<span class="kw">-&gt;&gt;</span> days-of-week</span>
 <span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>                         (<span class="kw">repeat</span> <span class="dv">3</span>)</span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>                         (<span class="kw">apply</span> <span class="kw">concat</span>)</span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>                         (<span class="kw">drop</span> <span class="dv">3</span>))}</span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>      tc/dataset</span>
-<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>      (tc/map-columns <span class="at">:traffic</span></span>
-<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>                      [<span class="at">:day-of-week</span>]</span>
-<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>                      (<span class="kw">fn</span> [dow]</span>
-<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>                        (<span class="kw">+</span> (<span class="kw">case</span> dow</span>
-<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>                             <span class="at">:Sat</span> <span class="dv">50</span></span>
-<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>                             <span class="at">:Sun</span> <span class="dv">50</span></span>
-<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>                             <span class="dv">60</span>)</span>
-<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>                           (<span class="kw">*</span> <span class="dv">5</span> (<span class="kw">rand</span>)))))))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>                         (<span class="kw">apply</span> <span class="kw">concat</span>))}</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>      tc/dataset</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>      (tc/map-columns <span class="at">:traffic</span></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>                      [<span class="at">:day-of-week</span>]</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>                      (<span class="kw">fn</span> [dow]</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>                        (<span class="kw">+</span> (<span class="kw">case</span> dow</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>                             <span class="at">:Sat</span> <span class="dv">50</span></span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>                             <span class="at">:Sun</span> <span class="dv">50</span></span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>                             <span class="dv">60</span>)</span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>                           (<span class="kw">*</span> <span class="dv">5</span> (<span class="kw">rand</span>)))))))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="sourceClojure">
 <div class="sourceCode" id="cb27"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">-&gt;</span> categorical-toydata</span>
@@ -715,7 +722,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>                        :=y <span class="at">:traffic</span>}))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div style="height:400px;width:100%;"><script>Plotly.newPlot(document.currentScript.parentElement,
-              [{"y":[62.767296091270815,64.99204432075402,64.65478522206891],"r":null,"name":":Thu","marker":{"color":"#1B9E77","size":10},"fill":null,"mode":"markers","width":null,"type":"scatter","theta":null,"z":null,"lon":null,"lat":null,"x":[0,7,14],"text":null},{"y":[62.894064155852426,60.13924539241317,61.6779902879025],"r":null,"name":":Fri","marker":{"color":"#D95F02","size":10},"fill":null,"mode":"markers","width":null,"type":"scatter","theta":null,"z":null,"lon":null,"lat":null,"x":[1,8,15],"text":null},{"y":[50.942267341356825,52.73458269302163,52.842467174133425],"r":null,"name":":Sat","marker":{"color":"#7570B3","size":10},"fill":null,"mode":"markers","width":null,"type":"scatter","theta":null,"z":null,"lon":null,"lat":null,"x":[2,9,16],"text":null},{"y":[52.60920524002523,54.3198282555377,54.42282131532328],"r":null,"name":":Sun","marker":{"color":"#E7298A","size":10},"fill":null,"mode":"markers","width":null,"type":"scatter","theta":null,"z":null,"lon":null,"lat":null,"x":[3,10,17],"text":null},{"y":[63.547346369597044,64.53552389795611],"r":null,"name":":Mon","marker":{"color":"#66A61E","size":10},"fill":null,"mode":"markers","width":null,"type":"scatter","theta":null,"z":null,"lon":null,"lat":null,"x":[4,11],"text":null},{"y":[63.7634607039869,64.7851146098925],"r":null,"name":":Tue","marker":{"color":"#E6AB02","size":10},"fill":null,"mode":"markers","width":null,"type":"scatter","theta":null,"z":null,"lon":null,"lat":null,"x":[5,12],"text":null},{"y":[60.14193462540878,63.59122498720078],"r":null,"name":":Wed","marker":{"color":"#A6761D","size":10},"fill":null,"mode":"markers","width":null,"type":"scatter","theta":null,"z":null,"lon":null,"lat":null,"x":[6,13],"text":null},{"y":[64.49964398338483,63.45276792036518,62.77680553405993],"r":null,"name":"","marker":{"color":"#666666","size":10},"fill":null,"mode":"markers","width":null,"type":"scatter","theta":null,"z":null,"lon":null,"lat":null,"x":[18,19,20],"text":null},{"y":[62.767296091270815,62.894064155852426,50.942267341356825,52.60920524002523,63.547346369597044,63.7634607039869,60.14193462540878,64.99204432075402,60.13924539241317,52.73458269302163,54.3198282555377,64.53552389795611,64.7851146098925,63.59122498720078,64.65478522206891,61.6779902879025,52.842467174133425,54.42282131532328,64.49964398338483,63.45276792036518,62.77680553405993],"r":null,"name":"","fill":null,"mode":"lines","width":null,"type":"scatter","theta":null,"z":null,"lon":null,"lat":null,"x":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],"text":null}], {"width":500,"height":400,"margin":{"t":25},"automargin":false,"plot_bgcolor":"rgb(235,235,235)","xaxis":{"gridcolor":"rgb(255,255,255)","title":"t"},"yaxis":{"gridcolor":"rgb(255,255,255)","title":"traffic"},"title":null}, {});</script></div>
+              [{"y":[61.71182191866124,61.60096652748154,64.18692582669777],"r":null,"name":":Mon","marker":{"color":"#1B9E77","size":10},"fill":null,"mode":"markers","width":null,"type":"scatter","theta":null,"z":null,"lon":null,"lat":null,"x":[0,7,14],"text":null},{"y":[60.75913086962025,63.33852290683573,61.980720147568505],"r":null,"name":":Tue","marker":{"color":"#D95F02","size":10},"fill":null,"mode":"markers","width":null,"type":"scatter","theta":null,"z":null,"lon":null,"lat":null,"x":[1,8,15],"text":null},{"y":[64.19457338375749,63.85074781390465,63.970453102374066],"r":null,"name":":Wed","marker":{"color":"#7570B3","size":10},"fill":null,"mode":"markers","width":null,"type":"scatter","theta":null,"z":null,"lon":null,"lat":null,"x":[2,9,16],"text":null},{"y":[62.72466536223687,62.55070670784596,62.32965349560365],"r":null,"name":":Thu","marker":{"color":"#E7298A","size":10},"fill":null,"mode":"markers","width":null,"type":"scatter","theta":null,"z":null,"lon":null,"lat":null,"x":[3,10,17],"text":null},{"y":[60.16444923172182,62.98818510538962],"r":null,"name":":Fri","marker":{"color":"#66A61E","size":10},"fill":null,"mode":"markers","width":null,"type":"scatter","theta":null,"z":null,"lon":null,"lat":null,"x":[4,11],"text":null},{"y":[50.72777852788473,52.32349731614603],"r":null,"name":":Sat","marker":{"color":"#E6AB02","size":10},"fill":null,"mode":"markers","width":null,"type":"scatter","theta":null,"z":null,"lon":null,"lat":null,"x":[5,12],"text":null},{"y":[54.16443850179322,53.0381363005943],"r":null,"name":":Sun","marker":{"color":"#A6761D","size":10},"fill":null,"mode":"markers","width":null,"type":"scatter","theta":null,"z":null,"lon":null,"lat":null,"x":[6,13],"text":null},{"y":[61.71182191866124,60.75913086962025,64.19457338375749,62.72466536223687,60.16444923172182,50.72777852788473,54.16443850179322,61.60096652748154,63.33852290683573,63.85074781390465,62.55070670784596,62.98818510538962,52.32349731614603,53.0381363005943,64.18692582669777,61.980720147568505,63.970453102374066,62.32965349560365],"r":null,"name":"","fill":null,"mode":"lines","width":null,"type":"scatter","theta":null,"z":null,"lon":null,"lat":null,"x":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17],"text":null}], {"width":500,"height":400,"margin":{"t":25},"automargin":false,"plot_bgcolor":"rgb(235,235,235)","xaxis":{"gridcolor":"rgb(255,255,255)","title":"t"},"yaxis":{"gridcolor":"rgb(255,255,255)","title":"traffic"},"title":null}, {});</script></div>
 <p>A model with all days except for one, dropping one category to avoid multicolinearity (note we begin with Thursday due to the order of appearance):</p>
 <div class="sourceClojure">
 <div class="sourceCode" id="cb28"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">-&gt;</span> categorical-toydata</span>
@@ -727,31 +734,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="printedClojure">
 <div class="sourceCode" id="cb29"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>Residuals:</span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>|      <span class="at">:min</span> |       <span class="at">:q1</span> |  <span class="at">:median</span> |      <span class="at">:q3</span> |     <span class="at">:max</span> |</span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>|-----------+-----------+----------+----------+----------|</span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>| -<span class="fl">1.724645</span> | -<span class="fl">0.987173</span> | <span class="fl">0.494089</span> | <span class="fl">0.654116</span> | <span class="fl">1.724645</span> |</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>|      <span class="at">:min</span> |       <span class="at">:q1</span> |   <span class="at">:median</span> |      <span class="at">:q3</span> |     <span class="at">:max</span> |</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>|-----------+-----------+-----------+----------+----------|</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>| -<span class="fl">1.411868</span> | -<span class="fl">0.790527</span> | -<span class="fl">0.040105</span> | <span class="fl">0.621828</span> | <span class="fl">1.687021</span> |</span>
 <span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>Coefficients:</span>
 <span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>|             <span class="at">:name</span> | <span class="at">:estimate</span> |  <span class="at">:stderr</span> |   <span class="at">:t-value</span> | <span class="at">:p-value</span> |   <span class="at">:confidence-interval</span> |</span>
-<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>|-------------------+-----------+----------+------------+----------+------------------------|</span>
-<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>|         Intercept | <span class="fl">63.576406</span> | <span class="fl">0.707229</span> |   <span class="fl">89.89513</span> |      <span class="fl">0.0</span> |   [<span class="fl">62.048531</span> <span class="fl">65.10428</span>] |</span>
-<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>| <span class="at">:day-of-week</span>=<span class="at">:Thu</span> |  <span class="fl">0.561636</span> | <span class="fl">1.000172</span> |   <span class="fl">0.561539</span> | <span class="fl">0.583981</span> |   [-<span class="fl">1.599105</span> <span class="fl">2.722377</span>] |</span>
-<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>| <span class="at">:day-of-week</span>=<span class="at">:Fri</span> | -<span class="fl">2.005973</span> | <span class="fl">1.000172</span> |  -<span class="fl">2.005627</span> |  <span class="fl">0.06617</span> |   [-<span class="fl">4.166713</span> <span class="fl">0.154768</span>] |</span>
-<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>| <span class="at">:day-of-week</span>=<span class="at">:Sat</span> |  -<span class="fl">11.4033</span> | <span class="fl">1.000172</span> | -<span class="fl">11.401336</span> |      <span class="fl">0.0</span> | [-<span class="fl">13.564041</span> -<span class="fl">9.242559</span>] |</span>
-<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a>| <span class="at">:day-of-week</span>=<span class="at">:Sun</span> | -<span class="fl">9.792454</span> | <span class="fl">1.000172</span> |  -<span class="fl">9.790768</span> |      <span class="fl">0.0</span> | [-<span class="fl">11.953195</span> -<span class="fl">7.631713</span>] |</span>
-<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a>| <span class="at">:day-of-week</span>=<span class="at">:Mon</span> |  <span class="fl">0.465029</span> | <span class="fl">1.118227</span> |   <span class="fl">0.415863</span> | <span class="fl">0.684293</span> |   [-<span class="fl">1.950752</span> <span class="fl">2.880811</span>] |</span>
-<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a>| <span class="at">:day-of-week</span>=<span class="at">:Tue</span> |  <span class="fl">0.697882</span> | <span class="fl">1.118227</span> |   <span class="fl">0.624097</span> | <span class="fl">0.543361</span> |     [-<span class="fl">1.7179</span> <span class="fl">3.113664</span>] |</span>
-<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a>| <span class="at">:day-of-week</span>=<span class="at">:Wed</span> | -<span class="fl">1.709826</span> | <span class="fl">1.118227</span> |  -<span class="fl">1.529051</span> | <span class="fl">0.150213</span> |   [-<span class="fl">4.125608</span> <span class="fl">0.705956</span>] |</span>
-<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-20"><a href="#cb29-20" aria-hidden="true" tabindex="-1"></a>F-statistic: <span class="fl">44.86520299386437</span> on degrees of freedom: {<span class="at">:residual</span> <span class="dv">13</span>, <span class="at">:model</span> <span class="dv">7</span>, <span class="at">:intercept</span> <span class="dv">1</span>}</span>
-<span id="cb29-21"><a href="#cb29-21" aria-hidden="true" tabindex="-1"></a>p-value: <span class="fl">4.203349979192694E-8</span></span>
-<span id="cb29-22"><a href="#cb29-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-23"><a href="#cb29-23" aria-hidden="true" tabindex="-1"></a>R2: <span class="fl">0.9602515065689318</span></span>
-<span id="cb29-24"><a href="#cb29-24" aria-hidden="true" tabindex="-1"></a>Adjusted R2: <span class="fl">0.9388484716445105</span></span>
-<span id="cb29-25"><a href="#cb29-25" aria-hidden="true" tabindex="-1"></a>Residual standard error: <span class="fl">1.224955849668599</span> on <span class="dv">13</span> degrees of freedom</span>
-<span id="cb29-26"><a href="#cb29-26" aria-hidden="true" tabindex="-1"></a>AIC: <span class="fl">76.04638540403079</span></span>
-<span id="cb29-27"><a href="#cb29-27" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>|             <span class="at">:name</span> |  <span class="at">:estimate</span> |  <span class="at">:stderr</span> |   <span class="at">:t-value</span> | <span class="at">:p-value</span> |   <span class="at">:confidence-interval</span> |</span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>|-------------------+------------+----------+------------+----------+------------------------|</span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>|         Intercept |  <span class="fl">62.499905</span> | <span class="fl">0.642873</span> |  <span class="fl">97.219703</span> |      <span class="fl">0.0</span> |  [<span class="fl">61.084951</span> <span class="fl">63.914858</span>] |</span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>| <span class="at">:day-of-week</span>=<span class="at">:Tue</span> |   -<span class="fl">0.47378</span> | <span class="fl">0.909159</span> |  -<span class="fl">0.521119</span> | <span class="fl">0.612614</span> |   [-<span class="fl">2.474827</span> <span class="fl">1.527266</span>] |</span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>| <span class="at">:day-of-week</span>=<span class="at">:Wed</span> |   <span class="fl">1.505353</span> | <span class="fl">0.909159</span> |   <span class="fl">1.655764</span> | <span class="fl">0.125989</span> |     [-<span class="fl">0.495693</span> <span class="fl">3.5064</span>] |</span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>| <span class="at">:day-of-week</span>=<span class="at">:Thu</span> |   <span class="fl">0.035104</span> | <span class="fl">0.909159</span> |   <span class="fl">0.038611</span> | <span class="fl">0.969892</span> |    [-<span class="fl">1.965943</span> <span class="fl">2.03615</span>] |</span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a>| <span class="at">:day-of-week</span>=<span class="at">:Fri</span> |  -<span class="fl">0.923588</span> | <span class="fl">1.016471</span> |  -<span class="fl">0.908622</span> | <span class="fl">0.383026</span> |    [-<span class="fl">3.160826</span> <span class="fl">1.31365</span>] |</span>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a>| <span class="at">:day-of-week</span>=<span class="at">:Sat</span> | -<span class="fl">10.974267</span> | <span class="fl">1.016471</span> | -<span class="fl">10.796437</span> |      <span class="fl">0.0</span> | [-<span class="fl">13.211505</span> -<span class="fl">8.737029</span>] |</span>
+<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a>| <span class="at">:day-of-week</span>=<span class="at">:Sun</span> |  -<span class="fl">8.898617</span> | <span class="fl">1.016471</span> |  -<span class="fl">8.754422</span> |   <span class="fl">3.0E-6</span> | [-<span class="fl">11.135855</span> -<span class="fl">6.661379</span>] |</span>
+<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a>F-statistic: <span class="fl">43.89372324406722</span> on degrees of freedom: {<span class="at">:residual</span> <span class="dv">11</span>, <span class="at">:model</span> <span class="dv">6</span>, <span class="at">:intercept</span> <span class="dv">1</span>}</span>
+<span id="cb29-20"><a href="#cb29-20" aria-hidden="true" tabindex="-1"></a>p-value: <span class="fl">4.719049045975865E-7</span></span>
+<span id="cb29-21"><a href="#cb29-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-22"><a href="#cb29-22" aria-hidden="true" tabindex="-1"></a>R2: <span class="fl">0.9599070338098382</span></span>
+<span id="cb29-23"><a href="#cb29-23" aria-hidden="true" tabindex="-1"></a>Adjusted R2: <span class="fl">0.938038143160659</span></span>
+<span id="cb29-24"><a href="#cb29-24" aria-hidden="true" tabindex="-1"></a>Residual standard error: <span class="fl">1.1134883844358656</span> on <span class="dv">11</span> degrees of freedom</span>
+<span id="cb29-25"><a href="#cb29-25" aria-hidden="true" tabindex="-1"></a>AIC: <span class="fl">62.08713040252579</span></span>
+<span id="cb29-26"><a href="#cb29-26" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>A model with all days except for one, dropping one category to avoid multicolinearity, and speciftying the order of encoded values:</p>
 <div class="sourceClojure">
@@ -765,29 +771,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="printedClojure">
 <div class="sourceCode" id="cb31"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>Residuals:</span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>|      <span class="at">:min</span> |       <span class="at">:q1</span> |  <span class="at">:median</span> |      <span class="at">:q3</span> |     <span class="at">:max</span> |</span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>|-----------+-----------+----------+----------+----------|</span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>| -<span class="fl">6.070973</span> | -<span class="fl">1.400967</span> | <span class="fl">0.494089</span> | <span class="fl">1.088817</span> | <span class="fl">5.819465</span> |</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>|      <span class="at">:min</span> |       <span class="at">:q1</span> |   <span class="at">:median</span> |      <span class="at">:q3</span> |     <span class="at">:max</span> |</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>|-----------+-----------+-----------+----------+----------|</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>| -<span class="fl">1.411868</span> | -<span class="fl">0.790527</span> | -<span class="fl">0.040105</span> | <span class="fl">0.621828</span> | <span class="fl">1.687021</span> |</span>
 <span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>Coefficients:</span>
 <span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>|             <span class="at">:name</span> | <span class="at">:estimate</span> |  <span class="at">:stderr</span> |  <span class="at">:t-value</span> | <span class="at">:p-value</span> |   <span class="at">:confidence-interval</span> |</span>
-<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>|-------------------+-----------+----------+-----------+----------+------------------------|</span>
-<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>|         Intercept | <span class="fl">58.680179</span> | <span class="fl">1.394483</span> |  <span class="fl">42.08024</span> |      <span class="fl">0.0</span> |   [<span class="fl">55.68931</span> <span class="fl">61.671047</span>] |</span>
-<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>| <span class="at">:day-of-week</span>=<span class="at">:Mon</span> |  <span class="fl">5.361256</span> | <span class="fl">2.788966</span> |   <span class="fl">1.92231</span> | <span class="fl">0.075155</span> |  [-<span class="fl">0.620481</span> <span class="fl">11.342994</span>] |</span>
-<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>| <span class="at">:day-of-week</span>=<span class="at">:Tue</span> |  <span class="fl">5.594109</span> | <span class="fl">2.788966</span> |    <span class="fl">2.0058</span> | <span class="fl">0.064601</span> |  [-<span class="fl">0.387628</span> <span class="fl">11.575846</span>] |</span>
-<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a>| <span class="at">:day-of-week</span>=<span class="at">:Wed</span> |  <span class="fl">3.186401</span> | <span class="fl">2.788966</span> |  <span class="fl">1.142503</span> | <span class="fl">0.272408</span> |   [-<span class="fl">2.795336</span> <span class="fl">9.168138</span>] |</span>
-<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a>| <span class="at">:day-of-week</span>=<span class="at">:Thu</span> |  <span class="fl">5.457863</span> | <span class="fl">2.415315</span> |   <span class="fl">2.25969</span> |  <span class="fl">0.04031</span> |   [<span class="fl">0.277527</span> <span class="fl">10.638199</span>] |</span>
-<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a>| <span class="at">:day-of-week</span>=<span class="at">:Fri</span> |  <span class="fl">2.890255</span> | <span class="fl">2.415315</span> |  <span class="fl">1.196636</span> |  <span class="fl">0.25132</span> |   [-<span class="fl">2.290082</span> <span class="fl">8.070591</span>] |</span>
-<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a>| <span class="at">:day-of-week</span>=<span class="at">:Sat</span> | -<span class="fl">6.507073</span> | <span class="fl">2.415315</span> | -<span class="fl">2.694088</span> | <span class="fl">0.017458</span> | [-<span class="fl">11.687409</span> -<span class="fl">1.326737</span>] |</span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>|             <span class="at">:name</span> |  <span class="at">:estimate</span> |  <span class="at">:stderr</span> |   <span class="at">:t-value</span> | <span class="at">:p-value</span> |   <span class="at">:confidence-interval</span> |</span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>|-------------------+------------+----------+------------+----------+------------------------|</span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>|         Intercept |  <span class="fl">62.499905</span> | <span class="fl">0.642873</span> |  <span class="fl">97.219703</span> |      <span class="fl">0.0</span> |  [<span class="fl">61.084951</span> <span class="fl">63.914858</span>] |</span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>| <span class="at">:day-of-week</span>=<span class="at">:Tue</span> |   -<span class="fl">0.47378</span> | <span class="fl">0.909159</span> |  -<span class="fl">0.521119</span> | <span class="fl">0.612614</span> |   [-<span class="fl">2.474827</span> <span class="fl">1.527266</span>] |</span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>| <span class="at">:day-of-week</span>=<span class="at">:Wed</span> |   <span class="fl">1.505353</span> | <span class="fl">0.909159</span> |   <span class="fl">1.655764</span> | <span class="fl">0.125989</span> |     [-<span class="fl">0.495693</span> <span class="fl">3.5064</span>] |</span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a>| <span class="at">:day-of-week</span>=<span class="at">:Thu</span> |   <span class="fl">0.035104</span> | <span class="fl">0.909159</span> |   <span class="fl">0.038611</span> | <span class="fl">0.969892</span> |    [-<span class="fl">1.965943</span> <span class="fl">2.03615</span>] |</span>
+<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a>| <span class="at">:day-of-week</span>=<span class="at">:Fri</span> |  -<span class="fl">0.923588</span> | <span class="fl">1.016471</span> |  -<span class="fl">0.908622</span> | <span class="fl">0.383026</span> |    [-<span class="fl">3.160826</span> <span class="fl">1.31365</span>] |</span>
+<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a>| <span class="at">:day-of-week</span>=<span class="at">:Sat</span> | -<span class="fl">10.974267</span> | <span class="fl">1.016471</span> | -<span class="fl">10.796437</span> |      <span class="fl">0.0</span> | [-<span class="fl">13.211505</span> -<span class="fl">8.737029</span>] |</span>
+<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a>| <span class="at">:day-of-week</span>=<span class="at">:Sun</span> |  -<span class="fl">8.898617</span> | <span class="fl">1.016471</span> |  -<span class="fl">8.754422</span> |   <span class="fl">3.0E-6</span> | [-<span class="fl">11.135855</span> -<span class="fl">6.661379</span>] |</span>
 <span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-19"><a href="#cb31-19" aria-hidden="true" tabindex="-1"></a>F-statistic: <span class="fl">4.6769343819919955</span> on degrees of freedom: {<span class="at">:residual</span> <span class="dv">14</span>, <span class="at">:model</span> <span class="dv">6</span>, <span class="at">:intercept</span> <span class="dv">1</span>}</span>
-<span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a>p-value: <span class="fl">0.008206523947469346</span></span>
+<span id="cb31-19"><a href="#cb31-19" aria-hidden="true" tabindex="-1"></a>F-statistic: <span class="fl">43.89372324406722</span> on degrees of freedom: {<span class="at">:residual</span> <span class="dv">11</span>, <span class="at">:model</span> <span class="dv">6</span>, <span class="at">:intercept</span> <span class="dv">1</span>}</span>
+<span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a>p-value: <span class="fl">4.719049045975865E-7</span></span>
 <span id="cb31-21"><a href="#cb31-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-22"><a href="#cb31-22" aria-hidden="true" tabindex="-1"></a>R2: <span class="fl">0.6671548893585943</span></span>
-<span id="cb31-23"><a href="#cb31-23" aria-hidden="true" tabindex="-1"></a>Adjusted R2: <span class="fl">0.524506984797992</span></span>
-<span id="cb31-24"><a href="#cb31-24" aria-hidden="true" tabindex="-1"></a>Residual standard error: <span class="fl">3.415771801402398</span> on <span class="dv">14</span> degrees of freedom</span>
-<span id="cb31-25"><a href="#cb31-25" aria-hidden="true" tabindex="-1"></a>AIC: <span class="fl">118.6735968990488</span></span>
+<span id="cb31-22"><a href="#cb31-22" aria-hidden="true" tabindex="-1"></a>R2: <span class="fl">0.9599070338098382</span></span>
+<span id="cb31-23"><a href="#cb31-23" aria-hidden="true" tabindex="-1"></a>Adjusted R2: <span class="fl">0.938038143160659</span></span>
+<span id="cb31-24"><a href="#cb31-24" aria-hidden="true" tabindex="-1"></a>Residual standard error: <span class="fl">1.1134883844358656</span> on <span class="dv">11</span> degrees of freedom</span>
+<span id="cb31-25"><a href="#cb31-25" aria-hidden="true" tabindex="-1"></a>AIC: <span class="fl">62.08713040252579</span></span>
 <span id="cb31-26"><a href="#cb31-26" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>A model with all days and no intercept, dropping the intercept to avoid multicolinearity and have an easier interpretation of the coefficients:</p>
@@ -797,36 +803,36 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>    (tm/design [<span class="at">:traffic</span>]</span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>               ['(tm/one-hot day-of-week</span>
 <span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>                             {<span class="at">:values</span> days-of-week</span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>                              <span class="at">:include-last</span> <span class="va">true</span>})])</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>                              <span class="at">:include-first</span> <span class="va">true</span>})])</span>
 <span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>    (tm/lm {<span class="at">:intercept</span>? <span class="va">false</span>})</span>
 <span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>    tm/summary)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="printedClojure">
 <div class="sourceCode" id="cb33"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>Residuals:</span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>|      <span class="at">:min</span> |       <span class="at">:q1</span> |  <span class="at">:median</span> |      <span class="at">:q3</span> |      <span class="at">:max</span> |</span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>|-----------+-----------+----------+----------+-----------|</span>
-<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>| -<span class="fl">1.724645</span> | -<span class="fl">0.842787</span> | <span class="fl">0.516743</span> | <span class="fl">1.088817</span> | <span class="fl">64.499644</span> |</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>|      <span class="at">:min</span> |       <span class="at">:q1</span> |   <span class="at">:median</span> |      <span class="at">:q3</span> |     <span class="at">:max</span> |</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>|-----------+-----------+-----------+----------+----------|</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>| -<span class="fl">1.411868</span> | -<span class="fl">0.790527</span> | -<span class="fl">0.040105</span> | <span class="fl">0.621828</span> | <span class="fl">1.687021</span> |</span>
 <span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>Coefficients:</span>
 <span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>|             <span class="at">:name</span> | <span class="at">:estimate</span> |   <span class="at">:stderr</span> | <span class="at">:t-value</span> | <span class="at">:p-value</span> |   <span class="at">:confidence-interval</span> |</span>
-<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>|-------------------+-----------+-----------+----------+----------+------------------------|</span>
-<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>| <span class="at">:day-of-week</span>=<span class="at">:Mon</span> | <span class="fl">64.041435</span> | <span class="fl">20.826996</span> | <span class="fl">3.074924</span> | <span class="fl">0.008232</span> | [<span class="fl">19.371972</span> <span class="fl">108.710898</span>] |</span>
-<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>| <span class="at">:day-of-week</span>=<span class="at">:Tue</span> | <span class="fl">64.274288</span> | <span class="fl">20.826996</span> | <span class="fl">3.086105</span> | <span class="fl">0.008052</span> | [<span class="fl">19.604825</span> <span class="fl">108.943751</span>] |</span>
-<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>| <span class="at">:day-of-week</span>=<span class="at">:Wed</span> |  <span class="fl">61.86658</span> | <span class="fl">20.826996</span> | <span class="fl">2.970499</span> | <span class="fl">0.010126</span> | [<span class="fl">17.197117</span> <span class="fl">106.536043</span>] |</span>
-<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>| <span class="at">:day-of-week</span>=<span class="at">:Thu</span> | <span class="fl">64.138042</span> | <span class="fl">17.005171</span> | <span class="fl">3.771679</span> | <span class="fl">0.002063</span> | [<span class="fl">27.665578</span> <span class="fl">100.610506</span>] |</span>
-<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a>| <span class="at">:day-of-week</span>=<span class="at">:Fri</span> | <span class="fl">61.570433</span> | <span class="fl">17.005171</span> | <span class="fl">3.620689</span> | <span class="fl">0.002782</span> |   [<span class="fl">25.09797</span> <span class="fl">98.042897</span>] |</span>
-<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a>| <span class="at">:day-of-week</span>=<span class="at">:Sat</span> | <span class="fl">52.173106</span> | <span class="fl">17.005171</span> | <span class="fl">3.068073</span> | <span class="fl">0.008345</span> |  [<span class="fl">15.700642</span> <span class="fl">88.645569</span>] |</span>
-<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a>| <span class="at">:day-of-week</span>=<span class="at">:Sun</span> | <span class="fl">53.783952</span> | <span class="fl">17.005171</span> |   <span class="fl">3.1628</span> | <span class="fl">0.006913</span> |  [<span class="fl">17.311488</span> <span class="fl">90.256415</span>] |</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>|             <span class="at">:name</span> | <span class="at">:estimate</span> |  <span class="at">:stderr</span> |  <span class="at">:t-value</span> | <span class="at">:p-value</span> |  <span class="at">:confidence-interval</span> |</span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>|-------------------+-----------+----------+-----------+----------+-----------------------|</span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>| <span class="at">:day-of-week</span>=<span class="at">:Mon</span> | <span class="fl">62.499905</span> | <span class="fl">0.642873</span> | <span class="fl">97.219703</span> |      <span class="fl">0.0</span> | [<span class="fl">61.084951</span> <span class="fl">63.914858</span>] |</span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>| <span class="at">:day-of-week</span>=<span class="at">:Tue</span> | <span class="fl">62.026125</span> | <span class="fl">0.642873</span> |  <span class="fl">96.48273</span> |      <span class="fl">0.0</span> | [<span class="fl">60.611171</span> <span class="fl">63.441078</span>] |</span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>| <span class="at">:day-of-week</span>=<span class="at">:Wed</span> | <span class="fl">64.005258</span> | <span class="fl">0.642873</span> | <span class="fl">99.561307</span> |      <span class="fl">0.0</span> | [<span class="fl">62.590305</span> <span class="fl">65.420212</span>] |</span>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>| <span class="at">:day-of-week</span>=<span class="at">:Thu</span> | <span class="fl">62.535009</span> | <span class="fl">0.642873</span> | <span class="fl">97.274308</span> |      <span class="fl">0.0</span> | [<span class="fl">61.120055</span> <span class="fl">63.949962</span>] |</span>
+<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a>| <span class="at">:day-of-week</span>=<span class="at">:Fri</span> | <span class="fl">61.576317</span> | <span class="fl">0.787355</span> |  <span class="fl">78.20653</span> |      <span class="fl">0.0</span> |  [<span class="fl">59.84336</span> <span class="fl">63.309274</span>] |</span>
+<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a>| <span class="at">:day-of-week</span>=<span class="at">:Sat</span> | <span class="fl">51.525638</span> | <span class="fl">0.787355</span> | <span class="fl">65.441415</span> |      <span class="fl">0.0</span> | [<span class="fl">49.792681</span> <span class="fl">53.258595</span>] |</span>
+<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a>| <span class="at">:day-of-week</span>=<span class="at">:Sun</span> | <span class="fl">53.601287</span> | <span class="fl">0.787355</span> | <span class="fl">68.077646</span> |      <span class="fl">0.0</span> |  [<span class="fl">51.86833</span> <span class="fl">55.334244</span>] |</span>
 <span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a>F-statistic: <span class="fl">10.650627607330913</span> on degrees of freedom: {<span class="at">:residual</span> <span class="dv">14</span>, <span class="at">:model</span> <span class="dv">7</span>, <span class="at">:intercept</span> <span class="dv">0</span>}</span>
-<span id="cb33-20"><a href="#cb33-20" aria-hidden="true" tabindex="-1"></a>p-value: <span class="fl">1.1519627273570698E-4</span></span>
+<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a>F-statistic: <span class="fl">7595.534119607707</span> on degrees of freedom: {<span class="at">:residual</span> <span class="dv">11</span>, <span class="at">:model</span> <span class="dv">7</span>, <span class="at">:intercept</span> <span class="dv">0</span>}</span>
+<span id="cb33-20"><a href="#cb33-20" aria-hidden="true" tabindex="-1"></a>p-value: <span class="fl">0.0</span></span>
 <span id="cb33-21"><a href="#cb33-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-22"><a href="#cb33-22" aria-hidden="true" tabindex="-1"></a>R2: <span class="fl">0.8419050768010102</span></span>
-<span id="cb33-23"><a href="#cb33-23" aria-hidden="true" tabindex="-1"></a>Adjusted R2: <span class="fl">0.7628576152015154</span></span>
-<span id="cb33-24"><a href="#cb33-24" aria-hidden="true" tabindex="-1"></a>Residual standard error: <span class="fl">29.453819600694708</span> on <span class="dv">14</span> degrees of freedom</span>
-<span id="cb33-25"><a href="#cb33-25" aria-hidden="true" tabindex="-1"></a>AIC: <span class="fl">209.15924230349367</span></span>
+<span id="cb33-22"><a href="#cb33-22" aria-hidden="true" tabindex="-1"></a>R2: <span class="fl">0.9997931543057467</span></span>
+<span id="cb33-23"><a href="#cb33-23" aria-hidden="true" tabindex="-1"></a>Adjusted R2: <span class="fl">0.9996615252275854</span></span>
+<span id="cb33-24"><a href="#cb33-24" aria-hidden="true" tabindex="-1"></a>Residual standard error: <span class="fl">1.1134883844358656</span> on <span class="dv">11</span> degrees of freedom</span>
+<span id="cb33-25"><a href="#cb33-25" aria-hidden="true" tabindex="-1"></a>AIC: <span class="fl">62.08713040252579</span></span>
 <span id="cb33-26"><a href="#cb33-26" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div style="background-color:grey;height:2px;width:100%;"></div>

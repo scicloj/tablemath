@@ -6,8 +6,6 @@
 ;; It composes [Tablecloth](https://scicloj.github.io/tablecloth/) datasets
 ;; with [Fastmath](https://github.com/generateme/fastmath) modeling.
 
-;; **status:** Experimental. Things are expected to keep moving.
-
 ^:kindly/hide-code
 (ns index
   (:require [scicloj.metamorph.ml.toydata.ggplot :as ggtoydata]
@@ -21,6 +19,17 @@
                 '(tm/one-hot cyl)])
     tm/lm
     tm/summary)
+
+;; ## General info
+;; |||
+;; |-|-|
+;; |Website | [https://scicloj.github.io/tablemath/](https://scicloj.github.io/tablemath/)
+;; |Source |[![(GitHub repo)](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/scicloj/tablemath)|
+;; |Deps |[![Clojars Project](https://img.shields.io/clojars/v/org.scicloj/tablemath.svg)](https://clojars.org/org.scicloj/tablemath)|
+;; |License |[EPLv2.0](https://github.com/scicloj/tablemath/blob/main/LICENSE)|
+;; |Status |🛠experimental🛠|
+
+
 
 ;; ## Chapters in this book
 

@@ -176,24 +176,24 @@
   The sequence of values to generate the binary columns is defined
   as follows: either the value provided for the `:values` key if present,
   or the distinct values in `column` in their order of appearance.
-  If the value of the option key `:include-last` is `false` (which is the default),
-  then the last value is ommitted.
+  If the value of the option key `:include-first` is `false` (which is the default),
+  then the first value is ommitted.
   This is handy for avoiding [multicollinearity](https://en.wikipedia.org/wiki/Multicollinearity)
   in linear regression.
 
   Supported options:
   - `:values` - the values to encode as columns - default `nil`
-  - `:include-last` - should the last value be included - default `false`
+  - `:include-first` - should the first value be included - default `false`
   "
   ([column]
    (one-hot column nil))
   ([column {:keys [values
-                   include-last]
+                   include-first]
             :or {values (distinct column)
-                 include-last false}}]
+                 include-first false}}]
    (let [nam (ds-col/column-name column)]
      (-> values
-         (cond-> (not include-last) butlast)
+         (cond-> (not include-first) rest)
          (->> (mapv (fn [value]
                       (-> column
                           (tcc/eq value)

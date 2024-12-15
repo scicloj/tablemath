@@ -8,7 +8,7 @@
 (extend-protocol Summarizable
   fastmath.ml.regression.LMData
   (summary [model]
-    (kind/code
-     (with-out-str
-       (println model)))))
+    (vary-meta
+     model
+     assoc :kindly/kind :kind/println)))
 

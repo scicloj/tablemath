@@ -7,7 +7,8 @@
             [tablemath-book.utils :as utils]
             [tablecloth.api :as tc]
             [tablecloth.column.api :as tcc]
-            [tech.v3.dataset.modelling :as ds-mod]))
+            [tech.v3.dataset.modelling :as ds-mod]
+            [scicloj.tableplot.v1.plotly :as plotly]))
 
 ;; ## Reference
 
@@ -108,11 +109,112 @@
 
 ;; ##### Linear relationship
 
-(-> {:x (range 9)}
-    tc/dataset
-    (tc/map-columns :y [:x] (fn [x]
-                              (+ (* 2 x) -3)))
-    (ds-mod/set-inference-target [:y])
+(def linear-toydata
+  (-> {:x (range 9)}
+      tc/dataset
+      (tc/map-columns :y
+                      [:x]
+                      (fn [x]
+                        (+ (* 2 x)
+                           -3
+                           (* 3 (rand)))))))
+
+(-> linear-toydata
+    plotly/layer-point)
+
+;; Note how the coefficients fit the way we generated the data:
+
+(-> linear-toydata
+    (tm/design [:y]
+               [:x])
     tm/lm
     tm/summary)
 
+;; ##### Cubic relationship
+
+(def cubic-toydata
+  (-> {:x (range 9)}
+      tc/dataset
+      (tc/map-columns :y
+                      [:x]
+                      (fn [x]
+                        (+ 50
+                           (* 4 x)
+                           (* -9 x x)
+                           (* x x x)
+                           (* 10 (rand)))))))
+
+(-> cubic-toydata
+    plotly/layer-point)
+
+;; Note how the coefficients fit the way we generated the data:
+
+(-> cubic-toydata
+    (tm/design [:y]
+               ['(tm/polynomial x 3)])
+    tm/lm
+    tm/summary)
+
+;; ##### Categorical relationship
+
+(def days-of-week
+  [:Mon :Tue :Wed :Thu :Fri :Sat :Sun])
+
+(def categorical-toydata
+  (-> {:t (range 21)
+       :day-of-week (->> days-of-week
+                         (repeat 3)
+                         (apply concat)
+                         (drop 3))}
+      tc/dataset
+      (tc/map-columns :traffic
+                      [:day-of-week]
+                      (fn [dow]
+                        (+ (case dow
+                             :Sat 50
+                             :Sun 50
+                             60)
+                           (* 5 (rand)))))))
+
+(-> categorical-toydata
+    (plotly/layer-point {:=x :t
+                         :=y :traffic
+                         :=color :day-of-week
+                         :=mark-size 10})
+    (plotly/layer-line {:=x :t
+                        :=y :traffic}))
+
+;; A model with all days except for one,
+;; dropping one category to avoid multicolinearity
+;; (note we begin with Thursday due to the order of appearance):
+
+(-> categorical-toydata
+    (tm/design [:traffic]
+               ['(tm/one-hot day-of-week)])
+    tm/lm
+    tm/summary)
+
+;; A model with all days except for one,
+;; dropping one category to avoid multicolinearity,
+;; and speciftying the order of encoded values:
+
+(-> categorical-toydata
+    (tm/design [:traffic]
+               ['(tm/one-hot day-of-week
+                             {:values days-of-week})])
+    tm/lm
+    tm/summary)
+
+;; A model with all days and no intercept,
+;; dropping the intercept to avoid multicolinearity
+;; and have an easier interpretation of the coefficients:
+
+;; Note how the coefficients fit the way we generated the data:
+
+(-> categorical-toydata
+    (tm/design [:traffic]
+               ['(tm/one-hot day-of-week
+                             {:values days-of-week
+                              :include-last true})])
+    (tm/lm {:intercept? false})
+    tm/summary)

@@ -157,13 +157,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="2">
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
   <li><a href="#preface" id="toc-preface" class="nav-link active" data-scroll-target="#preface"><span class="header-section-number">1</span> Preface</a>
   <ul>
-  <li><a href="#chapters-in-this-book" id="toc-chapters-in-this-book" class="nav-link" data-scroll-target="#chapters-in-this-book"><span class="header-section-number">1.1</span> Chapters in this book</a></li>
+  <li><a href="#general-info" id="toc-general-info" class="nav-link" data-scroll-target="#general-info">General info</a></li>
+  <li><a href="#chapters-in-this-book" id="toc-chapters-in-this-book" class="nav-link" data-scroll-target="#chapters-in-this-book">Chapters in this book</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -206,7 +207,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1 data-number="1"><span class="header-section-number">1</span> Preface</h1>
 <p>Tablemath is a Clojure library for math and statistical modeling with table ergonomics, inspired by R.</p>
 <p>It composes <a href="https://scicloj.github.io/tablecloth/">Tablecloth</a> datasets with <a href="https://github.com/generateme/fastmath">Fastmath</a> modeling.</p>
-<p><strong>status:</strong> Experimental. Things are expected to keep moving.</p>
 <div class="sourceClojure">
 <div class="sourceCode" id="cb1"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">-&gt;</span> ggtoydata/mpg</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    (tm/design [<span class="at">:hwy</span>]</span>
@@ -242,8 +242,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>AIC: <span class="fl">1239.1329320273044</span></span>
 <span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="chapters-in-this-book" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="chapters-in-this-book"><span class="header-section-number">1.1</span> Chapters in this book</h2>
+<section id="general-info" class="level2">
+<h2 class="anchored" data-anchor-id="general-info">General info</h2>
+<table class="caption-top table">
+<tbody>
+<tr class="odd">
+<td>Website</td>
+<td><a href="https://scicloj.github.io/tablemath/">https://scicloj.github.io/tablemath/</a></td>
+</tr>
+<tr class="even">
+<td>Source</td>
+<td><a href="https://github.com/scicloj/tablemath"><img src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&amp;logo=github&amp;logoColor=white" class="img-fluid" alt="(GitHub repo)"></a></td>
+</tr>
+<tr class="odd">
+<td>Deps</td>
+<td><a href="https://clojars.org/org.scicloj/tablemath"><img src="https://img.shields.io/clojars/v/org.scicloj/tablemath.svg" class="img-fluid" alt="Clojars Project"></a></td>
+</tr>
+<tr class="even">
+<td>License</td>
+<td><a href="https://github.com/scicloj/tablemath/blob/main/LICENSE">EPLv2.0</a></td>
+</tr>
+<tr class="odd">
+<td>Status</td>
+<td>🛠experimental🛠</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="chapters-in-this-book" class="level2">
+<h2 class="anchored" data-anchor-id="chapters-in-this-book">Chapters in this book</h2>
 <ul>
 <li><a href="tablemath_book.reference.html">API reference</a></li>
 </ul>

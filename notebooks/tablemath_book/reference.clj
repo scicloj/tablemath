@@ -105,7 +105,7 @@
 (tm/one-hot (tcc/column [:B :A :A :B :B :C]
                         {:name :x})
             {:values [:A :B :C]
-             :include-last true})
+             :include-first true})
 
 (utils/include-fnvar-as-section #'tm/lm)
 
@@ -146,7 +146,7 @@
                            (* 4 x)
                            (* -9 x x)
                            (* x x x)
-                           (* 10 (rand)))))))
+                           (* 3 (rand)))))))
 
 (-> cubic-toydata
     plotly/layer-point)
@@ -165,11 +165,10 @@
   [:Mon :Tue :Wed :Thu :Fri :Sat :Sun])
 
 (def categorical-toydata
-  (-> {:t (range 21)
+  (-> {:t (range 18)
        :day-of-week (->> days-of-week
                          (repeat 3)
-                         (apply concat)
-                         (drop 3))}
+                         (apply concat))}
       tc/dataset
       (tc/map-columns :traffic
                       [:day-of-week]

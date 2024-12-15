@@ -176,7 +176,7 @@
   Some default naming mechanisms are invoked if column names are missing.
 
   Columns of strings and keywords that have at most 20 distinct values
-  are one-hot-encoded by default.
+  are `one-hot`-encoded by default.
 
   Eventually, the sequence of all resulting columns is returned.
   "

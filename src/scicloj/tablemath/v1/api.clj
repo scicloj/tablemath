@@ -134,7 +134,8 @@
   The columns from `target-specs` will be marked as targets
   for modelling (e.g., regression, classification).
 
-  Inspired by [metamorph.ml.design-matrix](https://github.com/scicloj/metamorph.ml/blob/main/src/scicloj/metamorph/ml/design_matrix.clj)."
+  (Inspired by [metamorph.ml.design-matrix](https://github.com/scicloj/metamorph.ml/blob/main/src/scicloj/metamorph/ml/design_matrix.clj)
+  but adapted for columnwise computation.)"
   [dataset target-specs feature-specs]
   (let [target-columns (columns-with dataset target-specs)
         feature-columns (columns-with dataset feature-specs)]

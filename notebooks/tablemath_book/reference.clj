@@ -16,6 +16,30 @@
 
 ;; ## Reference
 
+(utils/include-fnvar-as-section #'tm/polynomial)
+
+;; #### Examples
+
+(-> [1 2 3]
+    (tcc/column {:name :x})
+    (tm/polynomial 4))
+
+(utils/include-fnvar-as-section #'tm/one-hot)
+
+;; #### Examples
+
+(tm/one-hot (tcc/column [:B :A :A :B :B :C]
+                        {:name :x}))
+
+(tm/one-hot (tcc/column [:B :A :A :B :B :C]
+                        {:name :x})
+            {:values [:A :B :C]})
+
+(tm/one-hot (tcc/column [:B :A :A :B :B :C]
+                        {:name :x})
+            {:values [:A :B :C]
+             :include-first true})
+
 (utils/include-fnvar-as-section #'tm/with)
 
 ;; #### Examples
@@ -82,30 +106,6 @@
               (tcc/column (tcc/* x y) {:name :d})]
             [:p '[(tcc/column (tcc/+ x y) {:name :c})
                   (tcc/column (tcc/* x y) {:name :d})]]])
-
-(utils/include-fnvar-as-section #'tm/polynomial)
-
-;; #### Examples
-
-(-> [1 2 3]
-    (tcc/column {:name :x})
-    (tm/polynomial 4))
-
-(utils/include-fnvar-as-section #'tm/one-hot)
-
-;; #### Examples
-
-(tm/one-hot (tcc/column [:B :A :A :B :B :C]
-                        {:name :x}))
-
-(tm/one-hot (tcc/column [:B :A :A :B :B :C]
-                        {:name :x})
-            {:values [:A :B :C]})
-
-(tm/one-hot (tcc/column [:B :A :A :B :B :C]
-                        {:name :x})
-            {:values [:A :B :C]
-             :include-first true})
 
 (utils/include-fnvar-as-section #'tm/lm)
 

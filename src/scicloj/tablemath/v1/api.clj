@@ -11,6 +11,57 @@
    [tech.v3.dataset :as ds]
    [scicloj.tablemath.v1.api :as tm]))
 
+(defn polynomial
+  "Given a `column` and an integer `degree`,
+  return a vector of columns with all its powers
+  up to that degree, named appropriately."
+  [column degree]
+  (->> (range 1 (inc degree))
+       (mapv (fn [i]
+               (let [nam (ds-col/column-name column)]
+                 (if (= i 1)
+                   column
+                   (-> (apply tcc/* (repeat i column))
+                       (tcc/column {:name (concat-names nam (str i))}))))))))
+
+(defn one-hot
+  "Given a `column`, create a vector of integer binary columns,
+  each encoding the presence of absence of one of its values.
+
+  E.g., if the `column` name is `:x`, and one of the values is
+  `:A`, then a resulting binary column will have 1 in all the rows
+  where `column` has `:A`.
+
+  The sequence of values to generate the binary columns is defined
+  as follows: either the value provided for the `:values` key if present,
+  or the distinct values in `column` in their order of appearance.
+  If the value of the option key `:include-first` is `false` (which is the default),
+  then the first value is ommitted.
+  This is handy for avoiding [multicollinearity](https://en.wikipedia.org/wiki/Multicollinearity)
+  in linear regression.
+
+  Supported options:
+  - `:values` - the values to encode as columns - default `nil`
+  - `:include-first` - should the first value be included - default `false`
+  "
+  ([column]
+   (one-hot column nil))
+  ([column {:keys [values
+                   include-first]
+            :or {values (distinct column)
+                 include-first false}}]
+   (let [nam (ds-col/column-name column)]
+     (-> values
+         (cond-> (not include-first) rest)
+         (->> (mapv (fn [value]
+                      (-> column
+                          (tcc/eq value)
+                          ;; convert boolean to int
+                          (tcc/* 1)
+                          (tcc/column
+                           {:name (concat-names nam (str "=" value))})))))))))
+
+
 (defn with
   "Evaluate expression `expr` in the context of destructuring
   all the keys of map `m`."
@@ -146,61 +197,7 @@
         (ds-mod/set-inference-target (->> target-columns
                                           (map ds-col/column-name))))))
 
-(defn polynomial
-  "Given a `column` and an integer `degree`,
-  return a vector of columns with all its powers
-  up to that degree, named appropriately."
-  [column degree]
-  (->> (range 1 (inc degree))
-       (mapv (fn [i]
-               (let [nam (ds-col/column-name column)]
-                 (if (= i 1)
-                   column
-                   (-> (apply tcc/* (repeat i column))
-                       (tcc/column {:name (concat-names nam (str i))}))))))))
 
-(-> {:x (range 9)
-     :y (repeatedly 9 rand)}
-    tc/dataset
-    (design [:y]
-            ['(polynomial x 3)]))
-
-(defn one-hot
-  "Given a `column`, create a vector of integer binary columns,
-  each encoding the presence of absence of one of its values.
-
-  E.g., if the `column` name is `:x`, and one of the values is
-  `:A`, then a resulting binary column will have 1 in all the rows
-  where `column` has `:A`.
-
-  The sequence of values to generate the binary columns is defined
-  as follows: either the value provided for the `:values` key if present,
-  or the distinct values in `column` in their order of appearance.
-  If the value of the option key `:include-first` is `false` (which is the default),
-  then the first value is ommitted.
-  This is handy for avoiding [multicollinearity](https://en.wikipedia.org/wiki/Multicollinearity)
-  in linear regression.
-
-  Supported options:
-  - `:values` - the values to encode as columns - default `nil`
-  - `:include-first` - should the first value be included - default `false`
-  "
-  ([column]
-   (one-hot column nil))
-  ([column {:keys [values
-                   include-first]
-            :or {values (distinct column)
-                 include-first false}}]
-   (let [nam (ds-col/column-name column)]
-     (-> values
-         (cond-> (not include-first) rest)
-         (->> (mapv (fn [value]
-                      (-> column
-                          (tcc/eq value)
-                          ;; convert boolean to int
-                          (tcc/* 1)
-                          (tcc/column
-                           {:name (concat-names nam (str "=" value))})))))))))
 
 
 

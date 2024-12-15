@@ -1,14 +1,13 @@
-;; # API Documentation
+;; # API reference
 
 ;; ## Setup
 
-(ns tablemath-book.api
+(ns tablemath-book.reference
   (:require [scicloj.tablemath.v1.api :as tm]
-            [tablemath-book.utils :as utils]
             [tablecloth.api :as tc]
             [tablecloth.column.api :as tcc]
-            [tech.v3.dataset.modelling :as ds-mod]
-            [scicloj.tableplot.v1.plotly :as plotly]))
+            [scicloj.tableplot.v1.plotly :as plotly]
+            [tablemath-book.utils :as utils]))
 
 ;; ## Reference
 

@@ -11,6 +11,13 @@
    [tech.v3.dataset :as ds]
    [scicloj.tablemath.v1.api :as tm]))
 
+(defn- concat-names [& names]
+  (-> (->> names
+           (map #(some-> % name))
+           (apply str))
+      (cond-> (some keyword? names)
+        keyword)))
+
 (defn polynomial
   "Given a `column` and an integer `degree`,
   return a vector of columns with all its powers
@@ -81,12 +88,7 @@
         (vary-meta update :name f))
     (tcc/column col {:name (f)})))
 
-(defn- concat-names [& names]
-  (-> (->> names
-           (map #(some-> % name))
-           (apply str))
-      (cond-> (some keyword? names)
-        keyword)))
+
 
 (defn- keyword-or-string? [v]
   (or (keyword? v)

@@ -1,6 +1,8 @@
-# tablemath
+# Tablemath
 
-math and stats with datasets
+Math and stats modelling with table ergonomics
+
+[![Clojars Project](https://img.shields.io/clojars/v/org.scicloj/tableplot.svg)](https://clojars.org/org.scicloj/tableplot)
 
 ## What is this about?
 

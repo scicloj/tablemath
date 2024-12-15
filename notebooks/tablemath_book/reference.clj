@@ -2,6 +2,11 @@
 
 ;; ## Setup
 
+;; In this notebook, we will use
+;; [Tablecloth](https://scicloj.github.io/tablecloth/)
+;; and [Tableplot](https://scicloj.github.io/tableplot/)
+;; for code examples, alongside Tablemath.
+
 (ns tablemath-book.reference
   (:require [scicloj.tablemath.v1.api :as tm]
             [tablecloth.api :as tc]

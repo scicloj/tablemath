@@ -1,6 +1,7 @@
 {:remote-repo {:git-url "https://github.com/scicloj/tablema"
                :branch "main"}
  :quarto {:format {:html {:toc true
+                          :toc-expand 3
                           :toc-depth 4
                           :theme [:cosmo "notebooks/custom.scss"]}}
           :fontsize "0.9em"}

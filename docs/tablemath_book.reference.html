@@ -1,0 +1,1275 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>2&nbsp; API reference – Tablemath</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./index.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-2486e1f0a3ee9ee1fc393803a1361cdb.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-f3b7c73196e6970667a9ac452f66cf5b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./tablemath_book.reference.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">API reference</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Tablemath</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Preface</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tablemath_book.reference.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">API reference</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#setup" id="toc-setup" class="nav-link active" data-scroll-target="#setup"><span class="header-section-number">2.1</span> Setup</a></li>
+  <li><a href="#reference" id="toc-reference" class="nav-link" data-scroll-target="#reference"><span class="header-section-number">2.2</span> Reference</a>
+  <ul>
+  <li><a href="#with" id="toc-with" class="nav-link" data-scroll-target="#with"><span class="header-section-number">2.2.1</span> <code>with</code></a>
+  <ul class="collapse">
+  <li><a href="#examples" id="toc-examples" class="nav-link" data-scroll-target="#examples"><span class="header-section-number">2.2.1.1</span> Examples</a></li>
+  </ul></li>
+  <li><a href="#columns-with" id="toc-columns-with" class="nav-link" data-scroll-target="#columns-with"><span class="header-section-number">2.2.2</span> <code>columns-with</code></a>
+  <ul class="collapse">
+  <li><a href="#examples-1" id="toc-examples-1" class="nav-link" data-scroll-target="#examples-1"><span class="header-section-number">2.2.2.1</span> Examples</a></li>
+  </ul></li>
+  <li><a href="#design" id="toc-design" class="nav-link" data-scroll-target="#design"><span class="header-section-number">2.2.3</span> <code>design</code></a>
+  <ul class="collapse">
+  <li><a href="#examples-2" id="toc-examples-2" class="nav-link" data-scroll-target="#examples-2"><span class="header-section-number">2.2.3.1</span> Examples</a></li>
+  </ul></li>
+  <li><a href="#polynomial" id="toc-polynomial" class="nav-link" data-scroll-target="#polynomial"><span class="header-section-number">2.2.4</span> <code>polynomial</code></a>
+  <ul class="collapse">
+  <li><a href="#examples-3" id="toc-examples-3" class="nav-link" data-scroll-target="#examples-3"><span class="header-section-number">2.2.4.1</span> Examples</a></li>
+  </ul></li>
+  <li><a href="#one-hot" id="toc-one-hot" class="nav-link" data-scroll-target="#one-hot"><span class="header-section-number">2.2.5</span> <code>one-hot</code></a>
+  <ul class="collapse">
+  <li><a href="#examples-4" id="toc-examples-4" class="nav-link" data-scroll-target="#examples-4"><span class="header-section-number">2.2.5.1</span> Examples</a></li>
+  </ul></li>
+  <li><a href="#lm" id="toc-lm" class="nav-link" data-scroll-target="#lm"><span class="header-section-number">2.2.6</span> <code>lm</code></a>
+  <ul class="collapse">
+  <li><a href="#examples-5" id="toc-examples-5" class="nav-link" data-scroll-target="#examples-5"><span class="header-section-number">2.2.6.1</span> Examples:</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">API reference</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<style></style>
+<style>.printedClojure .sourceCode {
+  background-color: transparent;
+  border-style: none;
+}
+</style>
+<style>.clay-limit-image-width .clay-image {max-width: 100%}
+.clay-side-by-side .sourceCode {margin: 0}
+.clay-side-by-side {margin: 1em 0}
+</style>
+<script src="tablemath_book.reference_files/md-default0.js" type="text/javascript"></script>
+<script src="tablemath_book.reference_files/md-default1.js" type="text/javascript"></script>
+<script src="tablemath_book.reference_files/plotly2.js" type="text/javascript"></script>
+<section id="setup" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="setup"><span class="header-section-number">2.1</span> Setup</h2>
+<div class="sourceClojure">
+<div class="sourceCode" id="cb1"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">ns</span> tablemath-book.reference</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  (<span class="at">:require</span> [scicloj.tablemath.v1.api <span class="at">:as</span> tm]</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>            [tablecloth.api <span class="at">:as</span> tc]</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>            [tablecloth.column.api <span class="at">:as</span> tcc]</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>            [scicloj.tableplot.v1.plotly <span class="at">:as</span> plotly]</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>            [tablemath-book.utils <span class="at">:as</span> utils]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="reference" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="reference"><span class="header-section-number">2.2</span> Reference</h2>
+<section id="with" class="level3" data-number="2.2.1">
+<h3 data-number="2.2.1" class="anchored" data-anchor-id="with"><span class="header-section-number">2.2.1</span> <code>with</code></h3>
+<p><code>[m expr]</code></p>
+<p>Evaluate expression <code>expr</code> in the context of destructuring all the keys of map <code>m</code>.</p>
+<section id="examples" class="level4" data-number="2.2.1.1">
+<h4 data-number="2.2.1.1" class="anchored" data-anchor-id="examples"><span class="header-section-number">2.2.1.1</span> Examples</h4>
+<div class="sourceClojure">
+<div class="sourceCode" id="cb2"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>(tm/with {<span class="at">:x</span> <span class="dv">3</span> <span class="at">:y</span> <span class="dv">9</span>}</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>         '(<span class="kw">+</span> x y))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="printedClojure">
+<div class="sourceCode" id="cb3"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dv">12</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="sourceClojure">
+<div class="sourceCode" id="cb4"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>(tm/with (tc/dataset {<span class="at">:x</span> (<span class="kw">range</span> <span class="dv">4</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">:y</span> <span class="dv">9</span>})</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>         '(tcc/+ x y))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="printedClojure">
+<div class="sourceCode" id="cb5"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>#tech.v3.dataset.column&lt;int64&gt;[<span class="dv">4</span>]</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>null</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>[<span class="dv">9</span>, <span class="dv">10</span>, <span class="dv">11</span>, <span class="dv">12</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="columns-with" class="level3" data-number="2.2.2">
+<h3 data-number="2.2.2" class="anchored" data-anchor-id="columns-with"><span class="header-section-number">2.2.2</span> <code>columns-with</code></h3>
+<p><code>[dataset specs]</code></p>
+<p>Compute a sequence of named columns by a given sequence of <code>specs</code> in the context of a given <code>dataset</code>.</p>
+<p>Each spec is one of the following:</p>
+<ul>
+<li><ol type="1">
+<li>a keyword or string - in that case, we just take the corresponding column of the original dataset.</li>
+</ol></li>
+<li><ol start="2" type="1">
+<li>a vector of two elements <code>[nam expr]</code>, where the first is a string or a keyword. In that case, <code>nam</code> is interpreted as a name or a name-prefix for the resulting columns, and <code>expr</code> is handled as an expression as in (3).</li>
+</ol></li>
+<li><ol start="3" type="1">
+<li>any other Clojure form - in that case, we treat it as an expression, and evaluate it while destructuring the column names of <code>dataset</code> as well as all the columns created by previous specs; the evaluation is expected to return one of the following:</li>
+</ol>
+<ul>
+<li>a column (or the data to create a column (e.g., a vector of numbers))</li>
+<li>a sequential of columns</li>
+<li>a map from column names to columns</li>
+</ul></li>
+</ul>
+<p>In any case, the result of the spec is turned into a sequence of named columns, which is conctenated to the columns from the previous specs. Some default naming mechanisms are invoked if column names are missing.</p>
+<p>Eventually, the sequence of all resulting columns is returned.</p>
+<section id="examples-1" class="level4" data-number="2.2.2.1">
+<h4 data-number="2.2.2.1" class="anchored" data-anchor-id="examples-1"><span class="header-section-number">2.2.2.1</span> Examples</h4>
+<p>Note the naming of the resulting columns, and note they can sequentially depend on each other.</p>
+<div class="sourceClojure">
+<div class="sourceCode" id="cb6"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>(tm/columns-with (tc/dataset {<span class="st">"w"</span> [<span class="at">:A</span> <span class="at">:B</span> <span class="at">:C</span>]</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>                              <span class="at">:x</span> (<span class="kw">range</span> <span class="dv">3</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>                              <span class="at">:y</span> (<span class="kw">reverse</span> (<span class="kw">range</span> <span class="dv">3</span>))})</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>                 [<span class="st">"w"</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>                  <span class="at">:x</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>                  '(tcc/+ x y)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>                  [<span class="at">:z</span> '(tcc/+ x y)]</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>                  [<span class="at">:z1000</span> '(tcc/* z <span class="dv">1000</span>)]</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>                  '((<span class="kw">juxt</span> tcc/+ tcc/*) x y)</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>                  [<span class="at">:p</span> '((<span class="kw">juxt</span> tcc/+ tcc/*) x y)]</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>                  '{<span class="at">:a</span> (tcc/+ x y)</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>                    <span class="at">:b</span> (tcc/* x y)}</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>                  [<span class="at">:p</span> '{<span class="at">:a</span> (tcc/+ x y)</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>                        <span class="at">:b</span> (tcc/* x y)}]</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>                  '[(tcc/column (tcc/+ x y) {<span class="at">:name</span> <span class="at">:c</span>})</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>                    (tcc/column (tcc/* x y) {<span class="at">:name</span> <span class="at">:d</span>})]</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>                  [<span class="at">:p</span> '[(tcc/column (tcc/+ x y) {<span class="at">:name</span> <span class="at">:c</span>})</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>                        (tcc/column (tcc/* x y) {<span class="at">:name</span> <span class="at">:d</span>})]]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="printedClojure">
+<div class="sourceCode" id="cb7"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>(#tech.v3.dataset.column&lt;keyword&gt;[<span class="dv">3</span>]</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>w</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>[<span class="at">:A</span>, <span class="at">:B</span>, <span class="at">:C</span>] #tech.v3.dataset.column&lt;int64&gt;[<span class="dv">3</span>]</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="at">:x</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>[<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>] #tech.v3.dataset.column&lt;int64&gt;[<span class="dv">3</span>]</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>(tcc/+ x y)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>[<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>] #tech.v3.dataset.column&lt;int64&gt;[<span class="dv">3</span>]</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="at">:z</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>[<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>] #tech.v3.dataset.column&lt;int64&gt;[<span class="dv">3</span>]</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="at">:z1000</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>[<span class="dv">2000</span>, <span class="dv">2000</span>, <span class="dv">2000</span>] #tech.v3.dataset.column&lt;int64&gt;[<span class="dv">3</span>]</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>((<span class="kw">juxt</span> tcc/+ tcc/*) x y)_0</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>[<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>] #tech.v3.dataset.column&lt;int64&gt;[<span class="dv">3</span>]</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>((<span class="kw">juxt</span> tcc/+ tcc/*) x y)_1</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>[<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>] #tech.v3.dataset.column&lt;int64&gt;[<span class="dv">3</span>]</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="at">:p</span>_0</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>[<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>] #tech.v3.dataset.column&lt;int64&gt;[<span class="dv">3</span>]</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="at">:p</span>_1</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>[<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>] #tech.v3.dataset.column&lt;int64&gt;[<span class="dv">3</span>]</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="at">:a</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>[<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>] #tech.v3.dataset.column&lt;int64&gt;[<span class="dv">3</span>]</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="at">:b</span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>[<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>] #tech.v3.dataset.column&lt;int64&gt;[<span class="dv">3</span>]</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a><span class="at">:pa</span></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>[<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>] #tech.v3.dataset.column&lt;int64&gt;[<span class="dv">3</span>]</span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a><span class="at">:pb</span></span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>[<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>] #tech.v3.dataset.column&lt;int64&gt;[<span class="dv">3</span>]</span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a><span class="at">:c</span></span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>[<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>] #tech.v3.dataset.column&lt;int64&gt;[<span class="dv">3</span>]</span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a><span class="at">:d</span></span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>[<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>] #tech.v3.dataset.column&lt;int64&gt;[<span class="dv">3</span>]</span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a><span class="at">:pc</span></span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>[<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>] #tech.v3.dataset.column&lt;int64&gt;[<span class="dv">3</span>]</span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a><span class="at">:pd</span></span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>[<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="design" class="level3" data-number="2.2.3">
+<h3 data-number="2.2.3" class="anchored" data-anchor-id="design"><span class="header-section-number">2.2.3</span> <code>design</code></h3>
+<p><code>[dataset target-specs feature-specs]</code></p>
+<p>Given a <code>dataset</code> and sequences <code>target-specs</code>, <code>feature-specs</code>, generate a new dataset from the columns generated by <a href="#columns-with"><code>columns-with</code></a> from these two sequences. The columns from <code>target-specs</code> will be marked as targets for modelling (e.g., regression, classification).</p>
+<p>(Inspired by <a href="https://github.com/scicloj/metamorph.ml/blob/main/src/scicloj/metamorph/ml/design_matrix.clj">metamorph.ml.design-matrix</a> but adapted for columnwise computation.)</p>
+<section id="examples-2" class="level4" data-number="2.2.3.1">
+<h4 data-number="2.2.3.1" class="anchored" data-anchor-id="examples-2"><span class="header-section-number">2.2.3.1</span> Examples</h4>
+<div class="sourceClojure">
+<div class="sourceCode" id="cb8"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>(tm/design (tc/dataset {<span class="st">"w"</span> [<span class="at">:A</span> <span class="at">:B</span> <span class="at">:C</span>]</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">:x</span> (<span class="kw">range</span> <span class="dv">3</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>                        <span class="at">:y</span> (<span class="kw">reverse</span> (<span class="kw">range</span> <span class="dv">3</span>))})</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>           [<span class="at">:y</span>]</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>           [<span class="st">"w"</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">:x</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>            '(tcc/+ x y)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>            [<span class="at">:z</span> '(tcc/+ x y)]</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>            [<span class="at">:z1000</span> '(tcc/* z <span class="dv">1000</span>)]</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>            '((<span class="kw">juxt</span> tcc/+ tcc/*) x y)</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>            [<span class="at">:p</span> '((<span class="kw">juxt</span> tcc/+ tcc/*) x y)]</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>            '{<span class="at">:a</span> (tcc/+ x y)</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>              <span class="at">:b</span> (tcc/* x y)}</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>            [<span class="at">:p</span> '{<span class="at">:a</span> (tcc/+ x y)</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>                  <span class="at">:b</span> (tcc/* x y)}]</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>            '[(tcc/column (tcc/+ x y)</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>                          {<span class="at">:name</span> <span class="at">:c</span>})</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>              (tcc/column (tcc/* x y)</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>                          {<span class="at">:name</span> <span class="at">:d</span>})]</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>            [<span class="at">:p</span> '[(tcc/column (tcc/+ x y)</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>                              {<span class="at">:name</span> <span class="at">:c</span>})</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>                  (tcc/column (tcc/* x y)</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>                              {<span class="at">:name</span> <span class="at">:d</span>})]]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="clay-dataset">
+<p>_unnamed [3 18]:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 2%">
+<col style="width: 2%">
+<col style="width: 2%">
+<col style="width: 9%">
+<col style="width: 2%">
+<col style="width: 5%">
+<col style="width: 19%">
+<col style="width: 19%">
+<col style="width: 4%">
+<col style="width: 4%">
+<col style="width: 2%">
+<col style="width: 2%">
+<col style="width: 3%">
+<col style="width: 3%">
+<col style="width: 2%">
+<col style="width: 2%">
+<col style="width: 3%">
+<col style="width: 3%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">:y</th>
+<th>w</th>
+<th style="text-align: right;">:x</th>
+<th style="text-align: right;">(tcc/+ x y)</th>
+<th style="text-align: right;">:z</th>
+<th style="text-align: right;">:z1000</th>
+<th style="text-align: right;">((juxt tcc/+ tcc/*) x y)_0</th>
+<th style="text-align: right;">((juxt tcc/+ tcc/*) x y)_1</th>
+<th style="text-align: right;">:p_0</th>
+<th style="text-align: right;">:p_1</th>
+<th style="text-align: right;">:a</th>
+<th style="text-align: right;">:b</th>
+<th style="text-align: right;">:pa</th>
+<th style="text-align: right;">:pb</th>
+<th style="text-align: right;">:c</th>
+<th style="text-align: right;">:d</th>
+<th style="text-align: right;">:pc</th>
+<th style="text-align: right;">:pd</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">2</td>
+<td>:A</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">2000</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1</td>
+<td>:B</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">2000</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">0</td>
+<td>:C</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">2000</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section id="polynomial" class="level3" data-number="2.2.4">
+<h3 data-number="2.2.4" class="anchored" data-anchor-id="polynomial"><span class="header-section-number">2.2.4</span> <code>polynomial</code></h3>
+<p><code>[column degree]</code></p>
+<p>Given a <code>column</code> and an integer <code>degree</code>, return a vector of columns with all its powers up to that degree, named appropriately.</p>
+<section id="examples-3" class="level4" data-number="2.2.4.1">
+<h4 data-number="2.2.4.1" class="anchored" data-anchor-id="examples-3"><span class="header-section-number">2.2.4.1</span> Examples</h4>
+<div class="sourceClojure">
+<div class="sourceCode" id="cb9"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">-&gt;</span> [<span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span>]</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    (tcc/column {<span class="at">:name</span> <span class="at">:x</span>})</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    (tm/polynomial <span class="dv">4</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="printedClojure">
+<div class="sourceCode" id="cb10"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>[#tech.v3.dataset.column&lt;int64&gt;[<span class="dv">3</span>]</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="at">:x</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>] #tech.v3.dataset.column&lt;int64&gt;[<span class="dv">3</span>]</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="at">:x2</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">9</span>] #tech.v3.dataset.column&lt;int64&gt;[<span class="dv">3</span>]</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="at">:x3</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>, <span class="dv">8</span>, <span class="dv">27</span>] #tech.v3.dataset.column&lt;int64&gt;[<span class="dv">3</span>]</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="at">:x4</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>, <span class="dv">16</span>, <span class="dv">81</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="one-hot" class="level3" data-number="2.2.5">
+<h3 data-number="2.2.5" class="anchored" data-anchor-id="one-hot"><span class="header-section-number">2.2.5</span> <code>one-hot</code></h3>
+<p><code>[column]</code></p>
+<p><code>[column {:keys [values include-last], :or {values (distinct column), include-last false}}]</code></p>
+<p>Given a <code>column</code>, create a vector of integer binary columns, each encoding the presence of absence of one of its values.</p>
+<p>E.g., if the <code>column</code> name is <code>:x</code>, and one of the values is <code>:A</code>, then a resulting binary column will have 1 in all the rows where <code>column</code> has <code>:A</code>.</p>
+<p>The sequence of values to generate the binary columns is defined as follows: either the value provided for the <code>:values</code> key if present, or the distinct values in <code>column</code> in their order of appearance. If the value of the option key <code>:include-last</code> is <code>false</code> (which is the default), then the last value is ommitted. This is handy for avoiding <a href="https://en.wikipedia.org/wiki/Multicollinearity">multicollinearity</a> in linear regression.</p>
+<p>Supported options: - <code>:values</code> - the values to encode as columns - default <code>nil</code> - <code>:include-last</code> - should the last value be included - default <code>false</code></p>
+<section id="examples-4" class="level4" data-number="2.2.5.1">
+<h4 data-number="2.2.5.1" class="anchored" data-anchor-id="examples-4"><span class="header-section-number">2.2.5.1</span> Examples</h4>
+<div class="sourceClojure">
+<div class="sourceCode" id="cb11"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>(tm/one-hot (tcc/column [<span class="at">:B</span> <span class="at">:A</span> <span class="at">:A</span> <span class="at">:B</span> <span class="at">:B</span> <span class="at">:C</span>]</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>                        {<span class="at">:name</span> <span class="at">:x</span>}))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="printedClojure">
+<div class="sourceCode" id="cb12"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>[#tech.v3.dataset.column&lt;int64&gt;[<span class="dv">6</span>]</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="at">:x</span>=<span class="at">:B</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>] #tech.v3.dataset.column&lt;int64&gt;[<span class="dv">6</span>]</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="at">:x</span>=<span class="at">:A</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>[<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="sourceClojure">
+<div class="sourceCode" id="cb13"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>(tm/one-hot (tcc/column [<span class="at">:B</span> <span class="at">:A</span> <span class="at">:A</span> <span class="at">:B</span> <span class="at">:B</span> <span class="at">:C</span>]</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>                        {<span class="at">:name</span> <span class="at">:x</span>})</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>            {<span class="at">:values</span> [<span class="at">:A</span> <span class="at">:B</span> <span class="at">:C</span>]})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="printedClojure">
+<div class="sourceCode" id="cb14"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>[#tech.v3.dataset.column&lt;int64&gt;[<span class="dv">6</span>]</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="at">:x</span>=<span class="at">:A</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>[<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>] #tech.v3.dataset.column&lt;int64&gt;[<span class="dv">6</span>]</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="at">:x</span>=<span class="at">:B</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="sourceClojure">
+<div class="sourceCode" id="cb15"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>(tm/one-hot (tcc/column [<span class="at">:B</span> <span class="at">:A</span> <span class="at">:A</span> <span class="at">:B</span> <span class="at">:B</span> <span class="at">:C</span>]</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>                        {<span class="at">:name</span> <span class="at">:x</span>})</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>            {<span class="at">:values</span> [<span class="at">:A</span> <span class="at">:B</span> <span class="at">:C</span>]</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">:include-last</span> <span class="va">true</span>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="printedClojure">
+<div class="sourceCode" id="cb16"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>[#tech.v3.dataset.column&lt;int64&gt;[<span class="dv">6</span>]</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="at">:x</span>=<span class="at">:A</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>[<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>] #tech.v3.dataset.column&lt;int64&gt;[<span class="dv">6</span>]</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="at">:x</span>=<span class="at">:B</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>] #tech.v3.dataset.column&lt;int64&gt;[<span class="dv">6</span>]</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="at">:x</span>=<span class="at">:C</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>[<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="lm" class="level3" data-number="2.2.6">
+<h3 data-number="2.2.6" class="anchored" data-anchor-id="lm"><span class="header-section-number">2.2.6</span> <code>lm</code></h3>
+<p><code>[dataset]</code></p>
+<p><code>[dataset options]</code></p>
+<p>Compute a linear regression model for <code>dataset</code>. The first column marked as target is the target. All the columns unmarked as target are the features. The resulting model is of type <code>fastmath.ml.regression.LMData</code>, a generated by <a href="https://github.com/generateme/fastmath">Fastmath</a>. It can be summarized by <a href="#summary"><code>summary</code></a>.</p>
+<p>See <a href="https://generateme.github.io/fastmath/clay/ml.html#lm">fastmath.ml.regression.lm</a> for options.</p>
+<section id="examples-5" class="level4" data-number="2.2.6.1">
+<h4 data-number="2.2.6.1" class="anchored" data-anchor-id="examples-5"><span class="header-section-number">2.2.6.1</span> Examples:</h4>
+<section id="linear-relationship" class="level5" data-number="2.2.6.1.1">
+<h5 data-number="2.2.6.1.1" class="anchored" data-anchor-id="linear-relationship"><span class="header-section-number">2.2.6.1.1</span> Linear relationship</h5>
+<div class="sourceClojure">
+<div class="sourceCode" id="cb17"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>(<span class="bu">def</span><span class="fu"> linear-toydata</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  (<span class="kw">-&gt;</span> {<span class="at">:x</span> (<span class="kw">range</span> <span class="dv">9</span>)}</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>      tc/dataset</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>      (tc/map-columns <span class="at">:y</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>                      [<span class="at">:x</span>]</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>                      (<span class="kw">fn</span> [x]</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>                        (<span class="kw">+</span> (<span class="kw">*</span> <span class="dv">2</span> x)</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>                           -<span class="dv">3</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>                           (<span class="kw">*</span> <span class="dv">3</span> (<span class="kw">rand</span>)))))))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="sourceClojure">
+<div class="sourceCode" id="cb18"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">-&gt;</span> linear-toydata</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    plotly/layer-point)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div style="height:400px;width:100%;"><script>Plotly.newPlot(document.currentScript.parentElement,
+              [{"y":[-0.5206877338449525,0.6259762364125554,1.9631978132658872,3.509833559413132,6.765540512522364,9.903721500497884,10.066228598272483,13.95889618975751,14.561077741342164],"r":null,"name":"","fill":null,"mode":"markers","width":null,"type":"scatter","theta":null,"z":null,"lon":null,"lat":null,"x":[0,1,2,3,4,5,6,7,8],"text":null}], {"width":500,"height":400,"margin":{"t":25},"automargin":false,"plot_bgcolor":"rgb(235,235,235)","xaxis":{"gridcolor":"rgb(255,255,255)","title":"x"},"yaxis":{"gridcolor":"rgb(255,255,255)","title":"y"},"title":null}, {});</script></div>
+<p>Note how the coefficients fit the way we generated the data:</p>
+<div class="sourceClojure">
+<div class="sourceCode" id="cb19"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">-&gt;</span> linear-toydata</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    (tm/design [<span class="at">:y</span>]</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>               [<span class="at">:x</span>])</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    tm/lm</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    tm/summary)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="printedClojure">
+<div class="sourceCode" id="cb20"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>Residuals:</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>|      <span class="at">:min</span> |       <span class="at">:q1</span> |  <span class="at">:median</span> |      <span class="at">:q3</span> |     <span class="at">:max</span> |</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>|-----------+-----------+----------+----------+----------|</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>| -<span class="fl">1.200713</span> | -<span class="fl">0.744596</span> | <span class="fl">0.006231</span> | <span class="fl">0.984176</span> | <span class="fl">1.095649</span> |</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>Coefficients:</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>|     <span class="at">:name</span> | <span class="at">:estimate</span> |  <span class="at">:stderr</span> |  <span class="at">:t-value</span> | <span class="at">:p-value</span> |  <span class="at">:confidence-interval</span> |</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>|-----------+-----------+----------+-----------+----------+-----------------------|</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>| Intercept | -<span class="fl">1.435742</span> | <span class="fl">0.562215</span> | -<span class="fl">2.553725</span> | <span class="fl">0.037897</span> | [-<span class="fl">2.765169</span> -<span class="fl">0.106315</span>] |</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>|        <span class="at">:x</span> |  <span class="fl">2.048763</span> | <span class="fl">0.118089</span> | <span class="fl">17.349349</span> |   <span class="fl">1.0E-6</span> |   [<span class="fl">1.769527</span> <span class="fl">2.327998</span>] |</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>F-statistic: <span class="fl">300.9999192401573</span> on degrees of freedom: {<span class="at">:residual</span> <span class="dv">7</span>, <span class="at">:model</span> <span class="dv">1</span>, <span class="at">:intercept</span> <span class="dv">1</span>}</span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>p-value: <span class="fl">5.196651776673278E-7</span></span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>R2: <span class="fl">0.9772727213134693</span></span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>Adjusted R2: <span class="fl">0.9740259672153935</span></span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>Residual standard error: <span class="fl">0.9147114746122321</span> on <span class="dv">7</span> degrees of freedom</span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>AIC: <span class="fl">27.67442509209375</span></span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="cubic-relationship" class="level5" data-number="2.2.6.1.2">
+<h5 data-number="2.2.6.1.2" class="anchored" data-anchor-id="cubic-relationship"><span class="header-section-number">2.2.6.1.2</span> Cubic relationship</h5>
+<div class="sourceClojure">
+<div class="sourceCode" id="cb21"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>(<span class="bu">def</span><span class="fu"> cubic-toydata</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  (<span class="kw">-&gt;</span> {<span class="at">:x</span> (<span class="kw">range</span> <span class="dv">9</span>)}</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>      tc/dataset</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>      (tc/map-columns <span class="at">:y</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>                      [<span class="at">:x</span>]</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>                      (<span class="kw">fn</span> [x]</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>                        (<span class="kw">+</span> <span class="dv">50</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>                           (<span class="kw">*</span> <span class="dv">4</span> x)</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>                           (<span class="kw">*</span> -<span class="dv">9</span> x x)</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>                           (<span class="kw">*</span> x x x)</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>                           (<span class="kw">*</span> <span class="dv">10</span> (<span class="kw">rand</span>)))))))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="sourceClojure">
+<div class="sourceCode" id="cb22"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">-&gt;</span> cubic-toydata</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    plotly/layer-point)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div style="height:400px;width:100%;"><script>Plotly.newPlot(document.currentScript.parentElement,
+              [{"y":[59.98019388504103,49.28710716882884,35.47784293461426,16.128580818116852,-5.262860478357755,-22.336170877932293,-31.73449270139789,-11.39770664761632,27.27624242647387],"r":null,"name":"","fill":null,"mode":"markers","width":null,"type":"scatter","theta":null,"z":null,"lon":null,"lat":null,"x":[0,1,2,3,4,5,6,7,8],"text":null}], {"width":500,"height":400,"margin":{"t":25},"automargin":false,"plot_bgcolor":"rgb(235,235,235)","xaxis":{"gridcolor":"rgb(255,255,255)","title":"x"},"yaxis":{"gridcolor":"rgb(255,255,255)","title":"y"},"title":null}, {});</script></div>
+<p>Note how the coefficients fit the way we generated the data:</p>
+<div class="sourceClojure">
+<div class="sourceCode" id="cb23"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">-&gt;</span> cubic-toydata</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    (tm/design [<span class="at">:y</span>]</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>               ['(tm/polynomial x <span class="dv">3</span>)])</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    tm/lm</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>    tm/summary)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="printedClojure">
+<div class="sourceCode" id="cb24"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>Residuals:</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>|      <span class="at">:min</span> |       <span class="at">:q1</span> |  <span class="at">:median</span> |     <span class="at">:q3</span> |    <span class="at">:max</span> |</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>|-----------+-----------+----------+---------+---------|</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>| -<span class="fl">4.665347</span> | -<span class="fl">2.371591</span> | <span class="fl">0.939768</span> | <span class="fl">2.03242</span> | <span class="fl">2.53654</span> |</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>Coefficients:</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>|     <span class="at">:name</span> | <span class="at">:estimate</span> |  <span class="at">:stderr</span> |  <span class="at">:t-value</span> | <span class="at">:p-value</span> |   <span class="at">:confidence-interval</span> |</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>|-----------+-----------+----------+-----------+----------+------------------------|</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>| Intercept | <span class="fl">57.830619</span> | <span class="fl">3.052193</span> | <span class="fl">18.947233</span> |   <span class="fl">8.0E-6</span> |  [<span class="fl">49.984706</span> <span class="fl">65.676532</span>] |</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>|        <span class="at">:x</span> |  <span class="fl">3.054811</span> | <span class="fl">3.522672</span> |  <span class="fl">0.867186</span> | <span class="fl">0.425492</span> |  [-<span class="fl">6.000506</span> <span class="fl">12.110128</span>] |</span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>|       <span class="at">:x2</span> | -<span class="fl">8.861813</span> | <span class="fl">1.063586</span> | -<span class="fl">8.332016</span> |  <span class="fl">4.07E-4</span> | [-<span class="fl">11.595847</span> -<span class="fl">6.127779</span>] |</span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>|       <span class="at">:x3</span> |  <span class="fl">0.999059</span> | <span class="fl">0.087241</span> |  <span class="fl">11.45169</span> |   <span class="fl">8.9E-5</span> |    [<span class="fl">0.774798</span> <span class="fl">1.223319</span>] |</span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>F-statistic: <span class="fl">257.0467029064518</span> on degrees of freedom: {<span class="at">:residual</span> <span class="dv">5</span>, <span class="at">:model</span> <span class="dv">3</span>, <span class="at">:intercept</span> <span class="dv">1</span>}</span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>p-value: <span class="fl">6.7702261611346515E-6</span></span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>R2: <span class="fl">0.9935578641744851</span></span>
+<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a>Adjusted R2: <span class="fl">0.9896925826791761</span></span>
+<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a>Residual standard error: <span class="fl">3.2939740310969015</span> on <span class="dv">5</span> degrees of freedom</span>
+<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a>AIC: <span class="fl">51.708519078029425</span></span>
+<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="categorical-relationship" class="level5" data-number="2.2.6.1.3">
+<h5 data-number="2.2.6.1.3" class="anchored" data-anchor-id="categorical-relationship"><span class="header-section-number">2.2.6.1.3</span> Categorical relationship</h5>
+<div class="sourceClojure">
+<div class="sourceCode" id="cb25"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>(<span class="bu">def</span><span class="fu"> days-of-week</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  [<span class="at">:Mon</span> <span class="at">:Tue</span> <span class="at">:Wed</span> <span class="at">:Thu</span> <span class="at">:Fri</span> <span class="at">:Sat</span> <span class="at">:Sun</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="sourceClojure">
+<div class="sourceCode" id="cb26"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>(<span class="bu">def</span><span class="fu"> categorical-toydata</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  (<span class="kw">-&gt;</span> {<span class="at">:t</span> (<span class="kw">range</span> <span class="dv">21</span>)</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">:day-of-week</span> (<span class="kw">-&gt;&gt;</span> days-of-week</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>                         (<span class="kw">repeat</span> <span class="dv">3</span>)</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>                         (<span class="kw">apply</span> <span class="kw">concat</span>)</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>                         (<span class="kw">drop</span> <span class="dv">3</span>))}</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>      tc/dataset</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>      (tc/map-columns <span class="at">:traffic</span></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>                      [<span class="at">:day-of-week</span>]</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>                      (<span class="kw">fn</span> [dow]</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>                        (<span class="kw">+</span> (<span class="kw">case</span> dow</span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>                             <span class="at">:Sat</span> <span class="dv">50</span></span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>                             <span class="at">:Sun</span> <span class="dv">50</span></span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>                             <span class="dv">60</span>)</span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>                           (<span class="kw">*</span> <span class="dv">5</span> (<span class="kw">rand</span>)))))))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="sourceClojure">
+<div class="sourceCode" id="cb27"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">-&gt;</span> categorical-toydata</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    (plotly/layer-point {:=x <span class="at">:t</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>                         :=y <span class="at">:traffic</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>                         :=color <span class="at">:day-of-week</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>                         :=mark-size <span class="dv">10</span>})</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>    (plotly/layer-line {:=x <span class="at">:t</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>                        :=y <span class="at">:traffic</span>}))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div style="height:400px;width:100%;"><script>Plotly.newPlot(document.currentScript.parentElement,
+              [{"y":[62.46675016776297,63.08594400279998,64.96897336300367],"r":null,"name":":Thu","marker":{"color":"#1B9E77","size":10},"fill":null,"mode":"markers","width":null,"type":"scatter","theta":null,"z":null,"lon":null,"lat":null,"x":[0,7,14],"text":null},{"y":[62.55123682604045,64.97819548478692,64.27836908217098],"r":null,"name":":Fri","marker":{"color":"#D95F02","size":10},"fill":null,"mode":"markers","width":null,"type":"scatter","theta":null,"z":null,"lon":null,"lat":null,"x":[1,8,15],"text":null},{"y":[52.27647498638067,51.655011363864176,51.78437959291907],"r":null,"name":":Sat","marker":{"color":"#7570B3","size":10},"fill":null,"mode":"markers","width":null,"type":"scatter","theta":null,"z":null,"lon":null,"lat":null,"x":[2,9,16],"text":null},{"y":[54.536737514413645,52.47102317548557,54.078771506432744],"r":null,"name":":Sun","marker":{"color":"#E7298A","size":10},"fill":null,"mode":"markers","width":null,"type":"scatter","theta":null,"z":null,"lon":null,"lat":null,"x":[3,10,17],"text":null},{"y":[63.86806813375103,63.23686618783955],"r":null,"name":":Mon","marker":{"color":"#66A61E","size":10},"fill":null,"mode":"markers","width":null,"type":"scatter","theta":null,"z":null,"lon":null,"lat":null,"x":[4,11],"text":null},{"y":[64.42852220442136,62.30177303809451],"r":null,"name":":Tue","marker":{"color":"#E6AB02","size":10},"fill":null,"mode":"markers","width":null,"type":"scatter","theta":null,"z":null,"lon":null,"lat":null,"x":[5,12],"text":null},{"y":[61.18699450488343,61.349203881912196],"r":null,"name":":Wed","marker":{"color":"#A6761D","size":10},"fill":null,"mode":"markers","width":null,"type":"scatter","theta":null,"z":null,"lon":null,"lat":null,"x":[6,13],"text":null},{"y":[61.274690487347385,62.84080127968144,60.978205407192874],"r":null,"name":"","marker":{"color":"#666666","size":10},"fill":null,"mode":"markers","width":null,"type":"scatter","theta":null,"z":null,"lon":null,"lat":null,"x":[18,19,20],"text":null},{"y":[62.46675016776297,62.55123682604045,52.27647498638067,54.536737514413645,63.86806813375103,64.42852220442136,61.18699450488343,63.08594400279998,64.97819548478692,51.655011363864176,52.47102317548557,63.23686618783955,62.30177303809451,61.349203881912196,64.96897336300367,64.27836908217098,51.78437959291907,54.078771506432744,61.274690487347385,62.84080127968144,60.978205407192874],"r":null,"name":"","fill":null,"mode":"lines","width":null,"type":"scatter","theta":null,"z":null,"lon":null,"lat":null,"x":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],"text":null}], {"width":500,"height":400,"margin":{"t":25},"automargin":false,"plot_bgcolor":"rgb(235,235,235)","xaxis":{"gridcolor":"rgb(255,255,255)","title":"t"},"yaxis":{"gridcolor":"rgb(255,255,255)","title":"traffic"},"title":null}, {});</script></div>
+<p>A model with all days except for one, dropping one category to avoid multicolinearity (note we begin with Thursday due to the order of appearance):</p>
+<div class="sourceClojure">
+<div class="sourceCode" id="cb28"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">-&gt;</span> categorical-toydata</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>    (tm/design [<span class="at">:traffic</span>]</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>               ['(tm/one-hot day-of-week)])</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>    tm/lm</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>    tm/summary)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="printedClojure">
+<div class="sourceCode" id="cb29"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>Residuals:</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>|      <span class="at">:min</span> |       <span class="at">:q1</span> |   <span class="at">:median</span> |      <span class="at">:q3</span> |     <span class="at">:max</span> |</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>|-----------+-----------+-----------+----------+----------|</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>| -<span class="fl">1.384697</span> | -<span class="fl">0.571451</span> | -<span class="fl">0.081105</span> | <span class="fl">0.612244</span> | <span class="fl">1.461751</span> |</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>Coefficients:</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>|             <span class="at">:name</span> | <span class="at">:estimate</span> |  <span class="at">:stderr</span> |   <span class="at">:t-value</span> | <span class="at">:p-value</span> |   <span class="at">:confidence-interval</span> |</span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>|-------------------+-----------+----------+------------+----------+------------------------|</span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>|         Intercept | <span class="fl">61.697899</span> | <span class="fl">0.589739</span> | <span class="fl">104.619059</span> |      <span class="fl">0.0</span> |  [<span class="fl">60.423846</span> <span class="fl">62.971952</span>] |</span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>| <span class="at">:day-of-week</span>=<span class="at">:Thu</span> |  <span class="fl">1.809323</span> | <span class="fl">0.834016</span> |    <span class="fl">2.16941</span> |  <span class="fl">0.04918</span> |    [<span class="fl">0.007541</span> <span class="fl">3.611106</span>] |</span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>| <span class="at">:day-of-week</span>=<span class="at">:Fri</span> |  <span class="fl">2.238035</span> | <span class="fl">0.834016</span> |   <span class="fl">2.683442</span> | <span class="fl">0.018777</span> |    [<span class="fl">0.436252</span> <span class="fl">4.039818</span>] |</span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>| <span class="at">:day-of-week</span>=<span class="at">:Sat</span> |  -<span class="fl">9.79261</span> | <span class="fl">0.834016</span> | -<span class="fl">11.741509</span> |      <span class="fl">0.0</span> | [-<span class="fl">11.594393</span> -<span class="fl">7.990828</span>] |</span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a>| <span class="at">:day-of-week</span>=<span class="at">:Sun</span> | -<span class="fl">8.002388</span> | <span class="fl">0.834016</span> |  -<span class="fl">9.595002</span> |      <span class="fl">0.0</span> |  [-<span class="fl">9.804171</span> -<span class="fl">6.200606</span>] |</span>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a>| <span class="at">:day-of-week</span>=<span class="at">:Mon</span> |  <span class="fl">1.854568</span> | <span class="fl">0.932459</span> |   <span class="fl">1.988901</span> | <span class="fl">0.068181</span> |   [-<span class="fl">0.159886</span> <span class="fl">3.869022</span>] |</span>
+<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a>| <span class="at">:day-of-week</span>=<span class="at">:Tue</span> |  <span class="fl">1.667249</span> | <span class="fl">0.932459</span> |   <span class="fl">1.788013</span> | <span class="fl">0.097093</span> |   [-<span class="fl">0.347206</span> <span class="fl">3.681703</span>] |</span>
+<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a>| <span class="at">:day-of-week</span>=<span class="at">:Wed</span> |   -<span class="fl">0.4298</span> | <span class="fl">0.932459</span> |  -<span class="fl">0.460932</span> | <span class="fl">0.652464</span> |   [-<span class="fl">2.444254</span> <span class="fl">1.584655</span>] |</span>
+<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-20"><a href="#cb29-20" aria-hidden="true" tabindex="-1"></a>F-statistic: <span class="fl">62.83532494050739</span> on degrees of freedom: {<span class="at">:residual</span> <span class="dv">13</span>, <span class="at">:model</span> <span class="dv">7</span>, <span class="at">:intercept</span> <span class="dv">1</span>}</span>
+<span id="cb29-21"><a href="#cb29-21" aria-hidden="true" tabindex="-1"></a>p-value: <span class="fl">5.195825547588129E-9</span></span>
+<span id="cb29-22"><a href="#cb29-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-23"><a href="#cb29-23" aria-hidden="true" tabindex="-1"></a>R2: <span class="fl">0.9712927498306022</span></span>
+<span id="cb29-24"><a href="#cb29-24" aria-hidden="true" tabindex="-1"></a>Adjusted R2: <span class="fl">0.955834999739388</span></span>
+<span id="cb29-25"><a href="#cb29-25" aria-hidden="true" tabindex="-1"></a>Residual standard error: <span class="fl">1.0214572481651054</span> on <span class="dv">13</span> degrees of freedom</span>
+<span id="cb29-26"><a href="#cb29-26" aria-hidden="true" tabindex="-1"></a>AIC: <span class="fl">68.41605556919023</span></span>
+<span id="cb29-27"><a href="#cb29-27" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>A model with all days except for one, dropping one category to avoid multicolinearity, and speciftying the order of encoded values:</p>
+<div class="sourceClojure">
+<div class="sourceCode" id="cb30"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">-&gt;</span> categorical-toydata</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>    (tm/design [<span class="at">:traffic</span>]</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>               ['(tm/one-hot day-of-week</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>                             {<span class="at">:values</span> days-of-week})])</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>    tm/lm</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>    tm/summary)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="printedClojure">
+<div class="sourceCode" id="cb31"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>Residuals:</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>|      <span class="at">:min</span> |       <span class="at">:q1</span> |   <span class="at">:median</span> |      <span class="at">:q3</span> |     <span class="at">:max</span> |</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>|-----------+-----------+-----------+----------+----------|</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>| -<span class="fl">5.225682</span> | -<span class="fl">1.051923</span> | -<span class="fl">0.081105</span> | <span class="fl">1.052818</span> | <span class="fl">5.144096</span> |</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>Coefficients:</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>|             <span class="at">:name</span> | <span class="at">:estimate</span> |  <span class="at">:stderr</span> |  <span class="at">:t-value</span> | <span class="at">:p-value</span> |   <span class="at">:confidence-interval</span> |</span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>|-------------------+-----------+----------+-----------+----------+------------------------|</span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>|         Intercept | <span class="fl">57.696705</span> | <span class="fl">1.142372</span> | <span class="fl">50.506046</span> |      <span class="fl">0.0</span> |    [<span class="fl">55.24656</span> <span class="fl">60.14685</span>] |</span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>| <span class="at">:day-of-week</span>=<span class="at">:Mon</span> |  <span class="fl">5.855762</span> | <span class="fl">2.284744</span> |  <span class="fl">2.562983</span> | <span class="fl">0.022542</span> |   [<span class="fl">0.955473</span> <span class="fl">10.756052</span>] |</span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>| <span class="at">:day-of-week</span>=<span class="at">:Tue</span> |  <span class="fl">5.668443</span> | <span class="fl">2.284744</span> |  <span class="fl">2.480996</span> | <span class="fl">0.026418</span> |   [<span class="fl">0.768153</span> <span class="fl">10.568732</span>] |</span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a>| <span class="at">:day-of-week</span>=<span class="at">:Wed</span> |  <span class="fl">3.571394</span> | <span class="fl">2.284744</span> |  <span class="fl">1.563148</span> | <span class="fl">0.140334</span> |   [-<span class="fl">1.328895</span> <span class="fl">8.471684</span>] |</span>
+<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a>| <span class="at">:day-of-week</span>=<span class="at">:Thu</span> |  <span class="fl">5.810518</span> | <span class="fl">1.978647</span> |  <span class="fl">2.936612</span> | <span class="fl">0.010829</span> |   [<span class="fl">1.566742</span> <span class="fl">10.054293</span>] |</span>
+<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a>| <span class="at">:day-of-week</span>=<span class="at">:Fri</span> |  <span class="fl">6.239229</span> | <span class="fl">1.978647</span> |  <span class="fl">3.153281</span> | <span class="fl">0.007046</span> |   [<span class="fl">1.995454</span> <span class="fl">10.483004</span>] |</span>
+<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a>| <span class="at">:day-of-week</span>=<span class="at">:Sat</span> | -<span class="fl">5.791416</span> | <span class="fl">1.978647</span> | -<span class="fl">2.926958</span> | <span class="fl">0.011038</span> | [-<span class="fl">10.035191</span> -<span class="fl">1.547641</span>] |</span>
+<span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-19"><a href="#cb31-19" aria-hidden="true" tabindex="-1"></a>F-statistic: <span class="fl">7.7238038001312175</span> on degrees of freedom: {<span class="at">:residual</span> <span class="dv">14</span>, <span class="at">:model</span> <span class="dv">6</span>, <span class="at">:intercept</span> <span class="dv">1</span>}</span>
+<span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a>p-value: <span class="fl">8.282772097132352E-4</span></span>
+<span id="cb31-21"><a href="#cb31-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-22"><a href="#cb31-22" aria-hidden="true" tabindex="-1"></a>R2: <span class="fl">0.7679922922031858</span></span>
+<span id="cb31-23"><a href="#cb31-23" aria-hidden="true" tabindex="-1"></a>Adjusted R2: <span class="fl">0.6685604174331226</span></span>
+<span id="cb31-24"><a href="#cb31-24" aria-hidden="true" tabindex="-1"></a>Residual standard error: <span class="fl">2.7982290599470065</span> on <span class="dv">14</span> degrees of freedom</span>
+<span id="cb31-25"><a href="#cb31-25" aria-hidden="true" tabindex="-1"></a>AIC: <span class="fl">110.29809414098222</span></span>
+<span id="cb31-26"><a href="#cb31-26" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>A model with all days and no intercept, dropping the intercept to avoid multicolinearity and have an easier interpretation of the coefficients:</p>
+<p>Note how the coefficients fit the way we generated the data:</p>
+<div class="sourceClojure">
+<div class="sourceCode" id="cb32"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">-&gt;</span> categorical-toydata</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>    (tm/design [<span class="at">:traffic</span>]</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>               ['(tm/one-hot day-of-week</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>                             {<span class="at">:values</span> days-of-week</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>                              <span class="at">:include-last</span> <span class="va">true</span>})])</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>    (tm/lm {<span class="at">:intercept</span>? <span class="va">false</span>})</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>    tm/summary)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="printedClojure">
+<div class="sourceCode" id="cb33"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>Residuals:</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>|      <span class="at">:min</span> |      <span class="at">:q1</span> |  <span class="at">:median</span> |      <span class="at">:q3</span> |      <span class="at">:max</span> |</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>|-----------+----------+----------+----------+-----------|</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>| -<span class="fl">1.384697</span> | -<span class="fl">0.36844</span> | <span class="fl">0.315601</span> | <span class="fl">1.052818</span> | <span class="fl">62.840801</span> |</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>Coefficients:</span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>|             <span class="at">:name</span> | <span class="at">:estimate</span> |   <span class="at">:stderr</span> | <span class="at">:t-value</span> | <span class="at">:p-value</span> |   <span class="at">:confidence-interval</span> |</span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>|-------------------+-----------+-----------+----------+----------+------------------------|</span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>| <span class="at">:day-of-week</span>=<span class="at">:Mon</span> | <span class="fl">63.552467</span> | <span class="fl">20.207368</span> | <span class="fl">3.145015</span> | <span class="fl">0.007162</span> | [<span class="fl">20.211973</span> <span class="fl">106.892961</span>] |</span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>| <span class="at">:day-of-week</span>=<span class="at">:Tue</span> | <span class="fl">63.365148</span> | <span class="fl">20.207368</span> | <span class="fl">3.135745</span> | <span class="fl">0.007295</span> | [<span class="fl">20.024654</span> <span class="fl">106.705641</span>] |</span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>| <span class="at">:day-of-week</span>=<span class="at">:Wed</span> | <span class="fl">61.268099</span> | <span class="fl">20.207368</span> | <span class="fl">3.031968</span> | <span class="fl">0.008965</span> | [<span class="fl">17.927605</span> <span class="fl">104.608593</span>] |</span>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>| <span class="at">:day-of-week</span>=<span class="at">:Thu</span> | <span class="fl">63.507223</span> | <span class="fl">16.499247</span> | <span class="fl">3.849098</span> | <span class="fl">0.001771</span> |  [<span class="fl">28.119858</span> <span class="fl">98.894587</span>] |</span>
+<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a>| <span class="at">:day-of-week</span>=<span class="at">:Fri</span> | <span class="fl">63.935934</span> | <span class="fl">16.499247</span> | <span class="fl">3.875082</span> | <span class="fl">0.001682</span> |  [<span class="fl">28.548569</span> <span class="fl">99.323299</span>] |</span>
+<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a>| <span class="at">:day-of-week</span>=<span class="at">:Sat</span> | <span class="fl">51.905289</span> | <span class="fl">16.499247</span> | <span class="fl">3.145919</span> | <span class="fl">0.007149</span> |  [<span class="fl">16.517924</span> <span class="fl">87.292654</span>] |</span>
+<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a>| <span class="at">:day-of-week</span>=<span class="at">:Sun</span> | <span class="fl">53.695511</span> | <span class="fl">16.499247</span> | <span class="fl">3.254422</span> | <span class="fl">0.005762</span> |  [<span class="fl">18.308146</span> <span class="fl">89.082876</span>] |</span>
+<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a>F-statistic: <span class="fl">11.319532559592306</span> on degrees of freedom: {<span class="at">:residual</span> <span class="dv">14</span>, <span class="at">:model</span> <span class="dv">7</span>, <span class="at">:intercept</span> <span class="dv">0</span>}</span>
+<span id="cb33-20"><a href="#cb33-20" aria-hidden="true" tabindex="-1"></a>p-value: <span class="fl">8.193716034810006E-5</span></span>
+<span id="cb33-21"><a href="#cb33-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-22"><a href="#cb33-22" aria-hidden="true" tabindex="-1"></a>R2: <span class="fl">0.8498445804271364</span></span>
+<span id="cb33-23"><a href="#cb33-23" aria-hidden="true" tabindex="-1"></a>Adjusted R2: <span class="fl">0.7747668706407046</span></span>
+<span id="cb33-24"><a href="#cb33-24" aria-hidden="true" tabindex="-1"></a>Residual standard error: <span class="fl">28.577533781387242</span> on <span class="dv">14</span> degrees of freedom</span>
+<span id="cb33-25"><a href="#cb33-25" aria-hidden="true" tabindex="-1"></a>AIC: <span class="fl">207.89072795893196</span></span>
+<span id="cb33-26"><a href="#cb33-26" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div style="background-color:grey;height:2px;width:100%;"></div>
+<div><pre><small><small>source: <a href="https://github.com/scicloj/tablema/blob/main/notebooks/tablemath_book/reference.clj">notebooks/tablemath_book/reference.clj</a></small></small></pre></div>
+
+
+</section>
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./index.html" class="pagination-link" aria-label="Preface">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Preface</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

@@ -4,7 +4,7 @@ Math and stats modelling with table ergonomics
 
 ## What is this about?
 
-This project is an initial attempt to create a Clojure library for math and statistics which is friendly to [tech.ml.dataset](https://github.com/techascent/tech.ml.dataset) and [Tablecloth](https://scicloj.github.io/tablecloth) datasets and uses the functionality of [Fastmath](https://github.com/generateme/fastmath). It is also intended to compose well with [Tableplot](https://scicloj.github.io/tableplot/) layered plotting.
+This project is an initial attempt to create a Clojure library for math and statistics which is friendly to [tech.ml.dataset](https://github.com/techascent/tech.ml.dataset) and [Tablecloth](https://scicloj.github.io/tablecloth) datasets and uses the functionality of [Fastmath](https://github.com/generateme/fastmath). It is also intended to compose well with [Tableplot](https://scicloj.github.io/tableplot/) layered plotting. It is highly inspired by [R](https://www.r-project.org/) and its package.
 
 In a way, it is intended to be a user-friendly compatiblity layer across these libraries.
 

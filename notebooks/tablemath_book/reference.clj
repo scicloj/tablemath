@@ -109,7 +109,7 @@
 
 (utils/include-fnvar-as-section #'tm/lm)
 
-;; #### Examples:
+;; #### Examples
 
 ;; ##### Linear relationship
 

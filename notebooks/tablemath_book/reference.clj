@@ -35,10 +35,12 @@
 ;; Note the naming of the resulting columns,
 ;; and note they can sequentially depend on each other.
 
-(tm/columns-with (tc/dataset {"w" [:A :B :C]
+(tm/columns-with (tc/dataset {"v" [4 5 6]
+                              :w [:A :B :C]
                               :x (range 3)
                               :y (reverse (range 3))})
-                 ["w"
+                 [:v
+                  :w
                   :x
                   '(tcc/+ x y)
                   [:z '(tcc/+ x y)]

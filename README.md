@@ -16,7 +16,7 @@ Possibly, after the details clarify, it will be merged into one of the other Sci
 |Website | [https://scicloj.github.io/tablemath/](https://scicloj.github.io/tablemath/)
 |Source |[![(GitHub repo)](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/scicloj/tablemath)|
 |Deps |[![Clojars Project](https://img.shields.io/clojars/v/org.scicloj/tablemath.svg)](https://clojars.org/org.scicloj/tablemath)|
-|License |[EPLv2.0](https://github.com/scicloj/tablemath/blob/main/LICENSE)|
+|License |[EPLv1.0](https://github.com/scicloj/tablemath/blob/main/LICENSE)|
 |Status |🛠experimental🛠|
 |Dev chat|[#tableplot-dev](https://clojurians.zulipchat.com/#narrow/channel/474332-tablemath-dev) at [Clojurians Zulip](https://scicloj.github.io/docs/community/chat/)|
 |User chat|[#data-science](https://clojurians.zulipchat.com/#narrow/stream/151924-data-science) at [Clojurians Zulip](https://scicloj.github.io/docs/community/chat/)|

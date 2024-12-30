@@ -10,6 +10,8 @@ In a way, it is intended to be a user-friendly compatiblity layer across these l
 
 Possibly, after the details clarify, it will be merged into one of the other Scicloj libraries.
 
+Comments and ideas would help!
+
 ## General info
 |||
 |-|-|

@@ -8,8 +8,7 @@
    [tech.v3.dataset.column :as ds-col]
    [tech.v3.dataset.modelling :as ds-mod]
    [tech.v3.dataset.categorical :as ds-cat]
-   [tech.v3.dataset :as ds]
-   [scicloj.tablemath.v1.api :as tm]))
+   [tech.v3.dataset :as ds]))
 
 (defn- concat-names [& names]
   (-> (->> names

@@ -1,27 +1,29 @@
-# Tablemath
+# Tablemath - a table operation library
 
-Math and stats modelling with table ergonomics
+[![Clojars Project](https://img.shields.io/clojars/v/org.scicloj/noj.svg)](https://clojars.org/org.scicloj/tablemath)
 
-## What is this about?
+Tablemath is an early-stage effort to build a Clojure library for mathematical and statistical modeling library that offers intuitive, expressive table operations to the Clojure data science ecosystem. 
 
-This project is an initial attempt to create a Clojure library for math and statistics which is friendly to [tech.ml.dataset](https://github.com/techascent/tech.ml.dataset) and [Tablecloth](https://scicloj.github.io/tablecloth) datasets and uses the functionality of [Fastmath](https://github.com/generateme/fastmath). It is also intended to compose well with [Tableplot](https://scicloj.github.io/tableplot/) layered plotting. It is highly inspired by [R](https://www.r-project.org/) and its packages.
+The project is designed for seamless integration with [tech.ml.dataset](https://github.com/techascent/tech.ml.dataset), [Tablecloth](https://scicloj.github.io/tablecloth), and [Fastmath](https://github.com/generateme/fastmath), Tablemath aims to provide a high-level layer for modeling and analysis with tabular data.
+And it is also designed to compose well with [Tableplot](https://scicloj.github.io/tableplot/) for layered data visualization.
 
-In a way, it is intended to be a user-friendly compatiblity layer across these libraries.
+Heavily inspired by [R](https://www.r-project.org/) and its ecosystem, Tablemath aims to serve as a user-friendly compatibility layer that bridges these tools within the Scicloj ecosystem.
 
-Possibly, after the details clarify, it will be merged into one of the other Scicloj libraries.
+As the design evolves, it will eventually be merged into another Scicloj library.
 
-Comments and ideas would help!
+Feedback, suggestions, and contributions are welcome!
 
-## General info
-|||
-|-|-|
-|Website | [https://scicloj.github.io/tablemath/](https://scicloj.github.io/tablemath/)
-|Source |[![(GitHub repo)](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/scicloj/tablemath)|
-|Deps |[![Clojars Project](https://img.shields.io/clojars/v/org.scicloj/tablemath.svg)](https://clojars.org/org.scicloj/tablemath)|
-|License |[EPLv1.0](https://github.com/scicloj/tablemath/blob/main/LICENSE)|
-|Status |🛠experimental🛠|
-|Dev chat|[#tableplot-dev](https://clojurians.zulipchat.com/#narrow/channel/474332-tablemath-dev) at [Clojurians Zulip](https://scicloj.github.io/docs/community/chat/)|
-|User chat|[#data-science](https://clojurians.zulipchat.com/#narrow/stream/151924-data-science) at [Clojurians Zulip](https://scicloj.github.io/docs/community/chat/)|
+## General Info
+
+| Resource           | Link                                                                                                                                                          |
+|:-------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Website            | [https://scicloj.github.io/tablemath/](https://scicloj.github.io/tablemath/)                                                                                  |
+| Source Code        | [![(GitHub repo)](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/scicloj/tablemath)   |
+| Dependencies       | [![Clojars Project](https://img.shields.io/clojars/v/org.scicloj/tablemath.svg)](https://clojars.org/org.scicloj/tablemath)                                   |
+| License            | [EPLv1.0](https://github.com/scicloj/tablemath/blob/main/LICENSE)                                                                                             |
+| Development Status | 🛠Experimental                                                                                                                                                |
+| Developer Chat     | [#tableplot-dev](https://clojurians.zulipchat.com/#narrow/channel/474332-tablemath-dev) at [Clojurians Zulip](https://scicloj.github.io/docs/community/chat/) |
+| User Support       | [#data-science](https://clojurians.zulipchat.com/#narrow/stream/151924-data-science) at [Clojurians Zulip](https://scicloj.github.io/docs/community/chat/)    |
 
 ## License
 

@@ -34,4 +34,5 @@
 _quarto.yml
 temp
 *.qmd
-
+*.iml
+.idea
